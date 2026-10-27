@@ -41,353 +41,392 @@ export default class NrsHrPoliciesAToZ extends React.Component<INrsHrPoliciesATo
 
             </div>
           </section>
+
         </div>
 
-        <main>
+        <div className="page-container">
 
-          <div className="container">
+          <div className="breadcrumb">
+            <a href="#">Home</a>
+            <span>/</span>
+            <span>HR Policies A to Z</span>
+          </div>
 
-            <div className="breadcrumb">
-              Home <span>/</span> HR Policies A to Z
-            </div>
+          <header className="page-header">
+            <h1>HR Policies A to Z</h1>
 
-            <h1 className="page-heading">
-              HR Policies A to Z
-            </h1>
-
-            <p className="page-description">
+            <p>
               Every NRS HR policy in alphabetical order. Filter by HR domain,
               search the list, or select a policy to open its page.
             </p>
 
-            <div className="heading-underline"></div>
+            <div className="red-line"></div>
+          </header>
 
-            <section className="policy-panel">
+          <div className="policy-card">
 
-              <div className="policy-controls">
+            <div className="toolbar">
 
-                <span className="filter-icon">☷</span>
+              <div className="filter-section">
+                <span className="filter-icon">&#9776;</span>
 
-                <select className="domain-select" id="domainFilter">
-                  <option value="all">All HR Domains</option>
-                  <option value="HR Operations" selected>
+                <select id="domainFilter">
+                  <option value="all">All HR domains</option>
+                  <option value="Talent Acquisition">
+                    Talent Acquisition
+                  </option>
+                  <option value="Hire & Onboarding">
+                    Hire &amp; Onboarding
+                  </option>
+                  <option value="HR Operations">
                     HR Operations
                   </option>
-                  <option value="Employee Relations">
-                    Employee Relations
+                  <option value="Employee Data Management">
+                    Employee Data Management
                   </option>
-                  <option value="Recruitment">
-                    Recruitment
+                  <option value="Oraganisation Design">
+                    Organisation Design
                   </option>
-                  <option value="Learning & Development">
-                    Learning &amp; Development
+                  <option value="Performance & Development">
+                    Performance &amp; Development
                   </option>
-                  <option value="Compensation">
-                    Compensation
+                  <option value="Compensation & Benefits">
+                    Compensation &amp; Benefits
+                  </option>
+                  <option value="Attendance & Absence Management">
+                    Attendance &amp; Absence Management
+                  </option>
+                  <option value="Job Change">
+                    Job Change
+                  </option>
+                  <option value="Staff Union & Conduct">
+                    Staff Union &amp; Conduct
+                  </option>
+                  <option value="Diversity, Equity & Inclusion">
+                    Diversity, Equity &amp; Inclusion
+                  </option>
+                  <option value="Exit & Separation">
+                    Exit &amp; Separation
                   </option>
                 </select>
-
-                <div className="list-search">
-                  <span>⌕</span>
-                  <input
-                    type="text"
-                    id="policySearch"
-                    placeholder="Search this list"
-                  />
-                </div>
-
               </div>
+
+              <div className="search-box">
+                <span className="search-icon">&#9906;</span>
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search this list"
+                />
+              </div>
+
+            </div>
+
+            <div className="table-wrapper">
 
               <table className="policy-table">
 
                 <thead>
                   <tr>
-                    <th>Policy ↑</th>
+                    <th className="policy-column">
+                      Policy
+                      <span className="sort-icon">&#9650;</span>
+                    </th>
                     <th>HR domain</th>
                     <th>Type</th>
                   </tr>
                 </thead>
 
-                <tbody id="policyBody">
+                <tbody id="policyTableBody">
 
-                  <tr className="letter-row" data-letter="C">
+                  <tr className="alphabet-row" data-letter="A">
                     <td colSpan={3}>
-                      <span className="letter">›</span>C
+                      <button className="toggle-btn" aria-expanded="true">
+                        <span className="arrow">&#9662;</span>
+                        A
+                      </button>
                     </td>
                   </tr>
 
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Contingent Labour Contractors Agency">
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Performance & Development">
                     <td>
-                      <a href="#" className="policy-link">
-                        Contingent Labour (Contractors/ Agency)
-                      </a>
+                      <a href="#">Academy Governance (NRS Academy)</a>
                     </td>
-                    <td>HR Operations</td>
+                    <td>Performance &amp; Development</td>
                     <td>Policy</td>
                   </tr>
 
-                  <tr className="letter-row" data-letter="D">
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Attendance & Absence Management">
+                    <td><a href="#">Adoption Leave</a></td>
+                    <td>Attendance &amp; Absence Management</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Talent Acquisition">
+                    <td><a href="#">Advertising &amp; Sourcing</a></td>
+                    <td>Talent Acquisition</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Performance & Development">
+                    <td><a href="#">Annual Learning Plan Governance</a></td>
+                    <td>Performance &amp; Development</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Attendance & Absence Management">
+                    <td><a href="#" className="highlight-link">Annual Leave</a></td>
+                    <td>Attendance &amp; Absence Management</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Anti Bribery &amp; Corruption</a></td>
+                    <td>Staff Union &amp; Conduct</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Anti-Bullying &amp; Harassment</a></td>
+                    <td>Staff Union &amp; Conduct</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Talent Acquisition">
+                    <td><a href="#">Assessment &amp; Interviewing</a></td>
+                    <td>Talent Acquisition</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="A"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Attendance &amp; Punctuality</a></td>
+                    <td>Staff Union &amp; Conduct</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="alphabet-row" data-letter="B">
                     <td colSpan={3}>
-                      <span className="letter">›</span>D
+                      <button className="toggle-btn" aria-expanded="false">
+                        <span className="arrow">&#9656;</span>
+                        B
+                      </button>
                     </td>
                   </tr>
 
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Delegation of Authority for HR Decisions">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Delegation of Authority for HR Decisions
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
+                  <tr className="policy-row" data-letter="B"
+                    data-domain="Compensation & Benefits">
+                    <td><a href="#">Benefits &amp; Allowances</a></td>
+                    <td>Compensation &amp; Benefits</td>
                     <td>Policy</td>
                   </tr>
 
-                  <tr className="letter-row" data-letter="E">
+                  <tr className="alphabet-row" data-letter="C">
                     <td colSpan={3}>
-                      <span className="letter">›</span>E
+                      <button className="toggle-btn" aria-expanded="false">
+                        <span className="arrow">&#9656;</span>
+                        C
+                      </button>
                     </td>
                   </tr>
 
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Employment Categories Contracts">
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Job Change">
+                    <td><a href="#">Career Path Policy</a></td>
+                    <td>Job Change</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Job Change">
+                    <td><a href="#">Career Progression Policy</a></td>
+                    <td>Job Change</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Attendance & Absence Management">
+                    <td><a href="#">Casual Leave</a></td>
+                    <td>Attendance &amp; Absence Management</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Performance & Development">
                     <td>
-                      <a href="#" className="policy-link">
-                        Employment Categories &amp; Contracts
-                      </a>
+                      <a href="#">Coaching, Mentoring &amp; Leadership Development</a>
                     </td>
+                    <td>Performance &amp; Development</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Code of Conduct &amp; Ethics</a></td>
+                    <td>Staff Union &amp; Conduct</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Attendance & Absence Management">
+                    <td><a href="#">Compassionate/Bereavement Leave</a></td>
+                    <td>Attendance &amp; Absence Management</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Compensation & Benefits">
+                    <td><a href="#">Compensation Philosophy &amp; Structure</a></td>
+                    <td>Compensation &amp; Benefits</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Compliance Monitoring &amp; Policy Assurance</a></td>
+                    <td>Staff Union &amp; Conduct</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Employee Data Management">
+                    <td><a href="#">Confidentiality &amp; Secrecy Obligations</a></td>
+                    <td>Employee Data Management</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Conflict of Interest</a></td>
+                    <td>Staff Union &amp; Conduct</td>
+                    <td>Policy</td>
+                  </tr>
+
+                  <tr className="policy-row" data-letter="C"
+                    data-domain="HR Operations">
+                    <td><a href="#">Contingent Labour (Contractors/ Agency)</a></td>
                     <td>HR Operations</td>
                     <td>Policy</td>
                   </tr>
 
-                  <tr className="letter-row" data-letter="F">
+                  <tr className="alphabet-row" data-letter="D">
                     <td colSpan={3}>
-                      <span className="letter">›</span>F
+                      <button className="toggle-btn" aria-expanded="false">
+                        <span className="arrow">&#9656;</span>
+                        D
+                      </button>
                     </td>
                   </tr>
 
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Flexible Working Hybrid Working">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Flexible Working / Hybrid Working
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
+                  <tr className="policy-row" data-letter="D"
+                    data-domain="Compensation & Benefits">
+                    <td><a href="#">Death-In-Service Support</a></td>
+                    <td>Compensation &amp; Benefits</td>
                     <td>Policy</td>
                   </tr>
 
-                  <tr className="letter-row" data-letter="H">
-                    <td colSpan={3}>
-                      <span className="letter">›</span>H
-                    </td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="HR Case Management Escalations">
-                    <td>
-                      <a href="#" className="policy-link">
-                        HR Case Management &amp; Escalations
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
+                  <tr className="policy-row" data-letter="D"
+                    data-domain="Staff Union & Conduct">
+                    <td><a href="#">Declarations of Interest (Annual/Role-based)</a></td>
+                    <td>Staff Union &amp; Conduct</td>
                     <td>Policy</td>
                   </tr>
 
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="HR Policy Governance Approval">
-                    <td>
-                      <a href="#" className="policy-link">
-                        HR Policy Governance &amp; Approval
-                      </a>
-                    </td>
+                  <tr className="policy-row" data-letter="D"
+                    data-domain="HR Operations">
+                    <td><a href="#">Delegation of Authority for HR Decisions</a></td>
                     <td>HR Operations</td>
                     <td>Policy</td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="HR Policy Management Document Control">
-                    <td>
-                      <a href="#" className="policy-link">
-                        HR Policy Management &amp; Document Control
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="HR Service Delivery Model Service Catalogue">
-                    <td>
-                      <a href="#" className="policy-link">
-                        HR Service Delivery Model &amp; HR Service Catalogue
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="letter-row" data-letter="O">
-                    <td colSpan={3}>
-                      <span className="letter">›</span>O
-                    </td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Overtime Shift Work">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Overtime &amp; Shift Work
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="letter-row" data-letter="R">
-                    <td colSpan={3}>
-                      <span className="letter">›</span>R
-                    </td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Relocation Mobility">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Relocation &amp; Mobility
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Remote Working Contractual Homeworking">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Remote Working (Contractual Homeworking)
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="letter-row" data-letter="S">
-                    <td colSpan={3}>
-                      <span className="letter">›</span>S
-                    </td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Secondment">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Secondment
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="letter-row" data-letter="W">
-                    <td colSpan={3}>
-                      <span className="letter">›</span>W
-                    </td>
-                  </tr>
-
-                  <tr className="policy-item"
-                    data-domain="HR Operations"
-                    data-policy="Working Hours Time Recording Policy">
-                    <td>
-                      <a href="#" className="policy-link">
-                        Working Hours &amp; Time Recording Policy
-                      </a>
-                    </td>
-                    <td>HR Operations</td>
-                    <td>Policy</td>
-                  </tr>
-
-                  <tr className="empty-row" id="emptyMessage" style={{ display: 'none' }}>
-                    <td colSpan={3}>
-                      No matching policies found.
-                    </td>
                   </tr>
 
                 </tbody>
-
               </table>
 
-            </section>
+              <div id="noResults" className="no-results" hidden>
+                No matching policies found.
+              </div>
 
-            <p className="page-note">
-              This behaves like a SharePoint list view, with the list search
-              box and column filtering. In the live site each policy name
-              links to its own page. In this prototype the built policies
-              open, for example Performance Appraisal and Disciplinary.
-            </p>
+            </div>
+          </div>
 
-            <section className="info-cards">
+        </div>
 
-              <a href="#" className="info-card">
+        <div className="hr-container">
 
-                <div className="card-icon">ⓘ</div>
+          <p className="info-text">
+            This behaves like a SharePoint list view, with the list search box and
+            column filtering. In the live site each policy name links to its own page.
+            In this prototype the built policies open, for example Performance
+            Appraisal and Disciplinary.
+          </p>
 
-                <div className="card-content">
+          <div className="cards-container">
 
-                  <h3>FAQs and Knowledge Base</h3>
+            <a href="#" className="hr-card">
 
-                  <p>
-                    Quick answers for this area of HR.
-                  </p>
+              <div className="icon-box">
+               
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M9.8 9a2.3 2.3 0 1 1 3.8 1.7c-1.1.9-1.6 1.2-1.6 2.8"></path>
+                  <circle cx="12" cy="16.8" r="0.5"
+                    fill="#e60000" stroke="none"></circle>
+                </svg>
+              </div>
 
-                  <span className="card-link">
-                    Go to FAQs ›
-                  </span>
+              <div className="card-content">
+                <h3 className="card-title">FAQs and Knowledge Base</h3>
 
-                </div>
+                <p className="card-description">
+                  Quick answers for this area of HR.
+                </p>
 
-              </a>
+                <span className="card-link">
+                  Go to FAQs
+                  <span className="arrow">&#9656;</span>
+                </span>
+              </div>
 
+            </a>
 
-              <a href="#" className="info-card">
+            <a href="#" className="hr-card">
 
-                <div className="card-icon">▤</div>
+              <div className="icon-box">
+              
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 4.5h14v12H9l-4 3v-15z"></path>
+                  <path d="M9 9h6"></path>
+                  <path d="M9 12h4"></path>
+                </svg>
+              </div>
 
-                <div className="card-content">
+              <div className="card-content">
+                <h3 className="card-title">Ask HR</h3>
 
-                  <h3>Ask HR</h3>
+                <p className="card-description">
+                  Raise a query through the People Service Portal.
+                </p>
 
-                  <p>
-                    Raise a query through the People Service Portal.
-                  </p>
+                <span className="card-link">
+                  Ask HR
+                  <span className="arrow">&#9656;</span>
+                </span>
+              </div>
 
-                  <span className="card-link">
-                    Ask HR ›
-                  </span>
-
-                </div>
-
-              </a>
-
-            </section>
+            </a>
 
           </div>
 
-        </main>
-        
+        </div>
+
       </>
 
     );

@@ -1,3 +1,7 @@
+.nrsHrDomains {
+    height: 219px;
+}
+
 .hr-hero {
     position: relative;
     display: flex;
@@ -49,7 +53,7 @@
     position: relative;
     z-index: 2;
     flex: 0 0 48%;
-    padding: 35px 0 35px 3.4%;
+    padding: 78px 0 35px 3.4%;
     box-sizing: border-box;
 }
 

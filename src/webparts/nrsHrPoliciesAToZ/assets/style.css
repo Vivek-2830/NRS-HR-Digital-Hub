@@ -1,7 +1,5 @@
-.container {
-    max-width: 790px;
-    width: 92%;
-    margin: 0 auto;
+.nrsHrPoliciesAToZ {
+    height: 219px;
 }
 
 .hr-hero {
@@ -55,7 +53,7 @@
     position: relative;
     z-index: 2;
     flex: 0 0 48%;
-    padding: 35px 0 35px 3.4%;
+    padding: 78px 0 35px 3.4%;
     box-sizing: border-box;
 }
 
@@ -118,431 +116,474 @@
             #000000 15%);
 }
 
-/* =========================
-   MAIN CONTENT
-========================= */
 
-main {
-    padding: 15px 0 45px;
+/* ------------------------------ */
+
+.page-container {
+    max-width: 1160px;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    padding: 18px 0 40px;
 }
 
+/* Breadcrumb */
 .breadcrumb {
-    color: #777;
-    font-size: 10px;
-    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #555;
 }
 
-.breadcrumb span {
-    margin: 0 5px;
+.breadcrumb a {
+    color: #405b75;
+    text-decoration: none;
 }
 
-.page-heading {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 7px;
-    color: #222;
+.breadcrumb a:hover {
+    text-decoration: underline;
 }
 
-.page-description {
-    font-size: 10px;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 10px;
+.breadcrumb span:nth-child(2) {
+    color: #999;
 }
 
-.heading-underline {
-    height: 3px;
-    width: 41px;
-    background: #d00000;
-    margin-bottom: 12px;
+/* Page Heading */
+.page-header h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #171717;
+    margin-bottom: 6px;
+    line-height: 1.35;
 }
 
-/* =========================
-   POLICY TABLE
-========================= */
+.page-header p {
+    font-size: 14px;
+    color: #42566b;
+    margin-bottom: 16px;
+}
 
-.policy-panel {
-    background: #fff;
-    border: 1px solid #e1e1e1;
+/* Red Underline */
+.red-line {
+    width: 64px;
+    height: 4px;
+    background-color: #c90016;
     border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+/* Main Policy Card */
+.policy-card {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #dedbd9;
+    border-radius: 5px 5px 0 0;
     overflow: hidden;
 }
 
-.policy-controls {
-    min-height: 33px;
+/* Toolbar */
+.toolbar {
+    min-height: 48px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #e8e6e4;
+}
+
+/* Filter */
+.filter-section {
     display: flex;
     align-items: center;
-    padding: 5px 8px;
-    gap: 8px;
-    border-bottom: 1px solid #eeeeee;
+    gap: 12px;
 }
 
 .filter-icon {
-    color: #777;
-    font-size: 11px;
+    color: #666;
+    font-size: 16px;
+    transform: rotate(180deg);
+    display: inline-block;
 }
 
-.domain-select {
-    height: 23px;
-    width: 145px;
-    border: 1px solid #dedede;
-    background: white;
-    padding: 0 8px;
-    font-size: 10px;
+.filter-section select {
+    width: 210px;
+    height: 33px;
+    padding: 5px 10px;
+    border: 1px solid #dedbd9;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #303030;
+    font-size: 13px;
     outline: none;
+    cursor: pointer;
 }
 
-.list-search {
-    height: 23px;
-    width: 150px;
-    margin-left: auto;
+.filter-section select:focus {
+    border-color: #777;
+}
+
+/* Search Box */
+.search-box {
+    width: 220px;
+    height: 33px;
     display: flex;
     align-items: center;
-    background: #f7f7f7;
-    padding: 0 8px;
-    gap: 6px;
+    gap: 9px;
+    padding: 0 12px;
+    background-color: #f3f2f1;
+    border-radius: 2px;
 }
 
-.list-search input {
+.search-icon {
+    font-size: 21px;
+    color: #777;
+    transform: rotate(-25deg);
+    display: inline-block;
+}
+
+.search-box input {
     width: 100%;
     min-width: 0;
+    height: 100%;
     border: none;
     outline: none;
     background: transparent;
-    font-size: 10px;
+    color: #333;
+    font-family: inherit;
+    font-size: 13px;
 }
 
+.search-box input::placeholder {
+    color: #586a7b;
+    opacity: 1;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Policy Table */
 .policy-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    background-color: #fff;
 }
 
-.policy-table th {
-    height: 26px;
-    text-align: left;
-    font-size: 9px;
-    font-weight: 600;
-    padding: 0 10px;
-    border-bottom: 1px solid #ededed;
-}
-
-.policy-table th:nth-child(1) {
+/* Column Widths */
+.policy-table th:nth-child(1),
+.policy-table td:nth-child(1) {
     width: 47%;
 }
 
-.policy-table th:nth-child(2) {
+.policy-table th:nth-child(2),
+.policy-table td:nth-child(2) {
     width: 30%;
 }
 
-.policy-table th:nth-child(3) {
+.policy-table th:nth-child(3),
+.policy-table td:nth-child(3) {
     width: 23%;
 }
 
-.policy-table td {
-    height: 27px;
-    padding: 5px 10px;
-    border-bottom: 1px solid #eeeeee;
-    font-size: 9px;
-    overflow-wrap: anywhere;
+/* Table Header */
+.policy-table thead th {
+    height: 38px;
+    padding: 8px 16px;
+    background-color: #faf9f8;
+    border-bottom: 1px solid #e7e5e3;
+    color: #111;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
-.policy-table td:nth-child(2),
-.policy-table td:nth-child(3) {
+.sort-icon {
     color: #777;
+    font-size: 9px;
+    margin-left: 4px;
+    vertical-align: 2px;
 }
 
-.policy-table tbody tr:last-child td {
-    border-bottom: none;
+/* Policy Rows */
+.policy-table tbody tr.policy-row {
+    height: 42.5px;
 }
 
-.policy-table tbody tr:not(.letter-row):hover {
-    background: #f8f8f8;
+.policy-table tbody tr.policy-row td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e8e6e4;
+    font-size: 13px;
+    font-weight: 400;
+    color: #40566d;
+    vertical-align: middle;
 }
 
-.policy-link {
-    cursor: pointer;
+/* Policy Links */
+.policy-table tbody tr.policy-row td a {
+    color: #193b5d;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.policy-link:hover {
-    color: #c90000;
+.policy-table tbody tr.policy-row td a:hover {
+    color: #c90016;
     text-decoration: underline;
 }
 
-.letter-row td {
-    height: 25px;
-    background: #fbfaf9;
-    color: #c90000;
-    font-weight: bold;
+/* Highlighted Link */
+.policy-table tbody tr.policy-row td a.highlight-link {
+    color: #d00016;
+    font-weight: 600;
 }
 
-.letter {
-    color: #d00000;
-    margin-right: 7px;
-    font-size: 8px;
+/* Alphabet Header Rows */
+.policy-table tbody tr.alphabet-row {
+    height: 36px;
+    background-color: #faf9f8;
 }
 
-.empty-row td {
-    text-align: center;
-    padding: 20px;
-    color: #777;
+.policy-table tbody tr.alphabet-row td {
+    padding: 5px 16px;
+    border-bottom: 1px solid #e8e6e4;
 }
 
-/* =========================
-   NOTE
-========================= */
-
-.page-note {
-    font-size: 9px;
-    line-height: 1.5;
-    font-style: italic;
-    color: #777;
-    margin-top: 8px;
-    margin-bottom: 21px;
-}
-
-/* =========================
-   BOTTOM CARDS
-========================= */
-
-.info-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+/* Expand / Collapse Button */
+.toggle-btn {
+    display: inline-flex;
+    align-items: center;
     gap: 10px;
+    border: none;
+    background: transparent;
+    color: #c90016;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.info-card {
-    min-height: 68px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px;
-    background: #fff;
-    border: 1px solid #e1e1e1;
-    border-radius: 3px;
-    transition: box-shadow 0.2s;
-}
-
-.info-card:hover {
-    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
-}
-
-.card-icon {
-    flex-shrink: 0;
-    height: 34px;
-    width: 34px;
-    border-radius: 7px;
-    background: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #d00000;
-    font-size: 16px;
-}
-
-.card-content h3 {
+.toggle-btn .arrow {
+    width: 9px;
+    display: inline-block;
     font-size: 11px;
-    margin-bottom: 5px;
+    text-align: center;
 }
 
-.card-content p {
-    font-size: 9px;
-    color: #777;
-    margin-bottom: 6px;
+.toggle-btn:hover {
+    color: #9f0011;
 }
 
-.card-link {
-    font-size: 9px;
-    color: #222;
+/* No Results Message */
+.no-results {
+    padding: 24px 16px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
 }
 
-.card-link:hover {
-    color: #c90000;
+/* Hidden Rows */
+[hidden] {
+    display: none !important;
 }
 
+/* Responsive Design */
+@media screen and (max-width: 768px) {
 
-/* =========================
-   RESPONSIVE DESIGN
-========================= */
-
-@media (min-width: 1100px) {
-
-    .container,
-    .header-inner,
-    .nav-inner,
-    .toolbar-inner,
-    .footer-main,
-    .footer-bottom-inner {
-        max-width: 790px;
+    .page-container {
+        width: calc(100% - 24px);
+        padding-top: 16px;
     }
 
-    .hero {
-        height: 110px;
-    }
-}
-
-@media (max-width: 650px) {
-
-    .top-bar {
-        gap: 8px;
-        padding: 0 8px;
+    .page-header h1 {
+        font-size: 25px;
     }
 
-    .organization-name {
-        font-size: 10px;
+    .page-header p {
+        font-size: 13px;
     }
 
-    .global-search {
-        max-width: none;
-        width: auto;
-        flex: 1;
+    .toolbar {
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
-    .top-icons {
-        gap: 8px;
-    }
-
-    .top-icons>span:nth-child(2),
-    .top-icons>span:nth-child(3) {
-        display: none;
-    }
-
-    .header-inner {
-        width: 94%;
-    }
-
-    .brand-logo {
-        font-size: 23px;
-    }
-
-    .site-title h2 {
-        font-size: 10px;
-    }
-
-    .site-title p {
-        font-size: 8px;
-    }
-
-    .header-actions {
-        display: none;
-    }
-
-    .nav-inner {
+    .filter-section {
         width: 100%;
-        overflow-x: auto;
-        padding: 0 12px;
-        gap: 18px;
     }
 
-    .nav-inner a {
-        font-size: 10px;
+    .filter-section select {
+        flex: 1;
+        width: auto;
+        min-width: 0;
     }
 
-    .hero {
-        height: 100px;
+    .search-box {
+        width: 100%;
     }
 
-    .hero-inner {
-        padding-left: 18px;
+    .policy-table {
+        min-width: 680px;
     }
+}
 
-    .hero-title {
-        width: 75%;
+@media screen and (max-width: 480px) {
+
+    .page-header h1 {
         font-size: 22px;
     }
 
-    .hero-people {
-        width: 30%;
-        font-size: 8px;
+    .breadcrumb {
+        font-size: 11px;
     }
 
-    .container {
-        width: 94%;
-    }
-
-    .page-heading {
-        font-size: 18px;
-    }
-
-    .policy-controls {
-        flex-wrap: wrap;
-    }
-
-    .list-search {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .policy-table th,
-    .policy-table td {
-        padding-left: 7px;
-        padding-right: 7px;
-        font-size: 9px;
-    }
-
-    .policy-table th:nth-child(1) {
-        width: 52%;
-    }
-
-    .policy-table th:nth-child(2) {
-        width: 28%;
-    }
-
-    .policy-table th:nth-child(3) {
-        width: 20%;
-    }
-
-    .info-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-main {
-        padding: 12px 0;
-        flex-wrap: wrap;
-    }
-
-    .footer-tagline {
-        font-size: 10px;
-    }
-
-    .footer-links {
-        width: 100%;
-        margin-left: 0;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .footer-bottom-inner {
-        padding: 8px 0;
-        flex-wrap: wrap;
+    .red-line {
+        margin-bottom: 16px;
     }
 }
 
-@media (max-width: 380px) {
+/* -------------------- */
 
-    .brand-subtitle,
-    .brand-divider {
-        display: none;
+.hr-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 0;
+}
+
+/* Information text */
+.info-text {
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #42678a;
+    margin-bottom: 32px;
+}
+
+/* Cards container */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* Individual card */
+.hr-card {
+    display: flex;
+    align-items: center;
+    min-height: 110px;
+    padding: 22px 24px;
+    background-color: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.hr-card:hover {
+    border-color: #b8b5b3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Icon box */
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    margin-right: 16px;
+    background-color: #f3f2f1;
+    border-radius: 9px;
+}
+
+.icon-box svg {
+    width: 19px;
+    height: 19px;
+    stroke: #e60000;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Card content */
+.card-content {
+    min-width: 0;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 7px;
+}
+
+.card-description {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #505050;
+    margin-bottom: 6px;
+}
+
+/* Card link */
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+.arrow {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .hr-container {
+        padding: 16px;
     }
 
-    .site-title {
-        margin-left: 8px;
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .hero-title {
-        font-size: 19px;
+    .info-text {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hr-card {
+        padding: 18px 14px;
     }
 
-    .policy-table th:nth-child(2),
-    .policy-table td:nth-child(2) {
-        display: none;
+    .icon-box {
+        width: 42px;
+        height: 42px;
+        margin-right: 12px;
     }
 
-    .policy-table th:nth-child(1) {
-        width: 75%;
+    .card-title {
+        font-size: 14px;
     }
 
-    .policy-table th:nth-child(3) {
-        width: 25%;
+    .card-description,
+    .card-link {
+        font-size: 12px;
     }
 }
