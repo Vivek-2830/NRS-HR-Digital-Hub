@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "nrs-hr-digital-hub-client-side-solution",
+    "id": "8dc877bf-14fd-4799-8164-fb86ed691c4f",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.14.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "nrs-hr-digital-hub description"
+      },
+      "longDescription": {
+        "default": "nrs-hr-digital-hub description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "nrs-hr-digital-hub Feature",
+        "description": "The feature that activates elements of the nrs-hr-digital-hub solution.",
+        "id": "b01ad0f9-2fbd-4bfb-ae94-77d70aca263e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/nrs-hr-digital-hub.sppkg"
+  }
+}

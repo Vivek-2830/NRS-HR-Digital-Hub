@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "nrs-hr-digital-hub",
+    "libraryId": "8dc877bf-14fd-4799-8164-fb86ed691c4f",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "nrs-hr-digital-hub",
+    "solutionShortDescription": "nrs-hr-digital-hub description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
