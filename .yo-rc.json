@@ -1,7 +1,7 @@
 {
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
-    "isCreatingSolution": true,
+    "isCreatingSolution": false,
     "version": "1.14.0",
     "libraryName": "nrs-hr-digital-hub",
     "libraryId": "8dc877bf-14fd-4799-8164-fb86ed691c4f",

@@ -9,10 +9,37 @@
           "manifest": "./src/webparts/nrsHomePage/NrsHomePageWebPart.manifest.json"
         }
       ]
+    },
+    "nrs-footer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/nrsFooter/NrsFooterWebPart.js",
+          "manifest": "./src/webparts/nrsFooter/NrsFooterWebPart.manifest.json"
+        }
+      ]
+    },
+    "nrs-hr-domains-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/nrsHrDomains/NrsHrDomainsWebPart.js",
+          "manifest": "./src/webparts/nrsHrDomains/NrsHrDomainsWebPart.manifest.json"
+        }
+      ]
+    },
+    "nrs-hr-policies-a-to-z-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/nrsHrPoliciesAToZ/NrsHrPoliciesAToZWebPart.js",
+          "manifest": "./src/webparts/nrsHrPoliciesAToZ/NrsHrPoliciesAToZWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "NrsHomePageWebPartStrings": "lib/webparts/nrsHomePage/loc/{locale}.js"
+    "NrsHomePageWebPartStrings": "lib/webparts/nrsHomePage/loc/{locale}.js",
+    "NrsFooterWebPartStrings": "lib/webparts/nrsFooter/loc/{locale}.js",
+    "NrsHrDomainsWebPartStrings": "lib/webparts/nrsHrDomains/loc/{locale}.js",
+    "NrsHrPoliciesAToZWebPartStrings": "lib/webparts/nrsHrPoliciesAToZ/loc/{locale}.js"
   }
 }

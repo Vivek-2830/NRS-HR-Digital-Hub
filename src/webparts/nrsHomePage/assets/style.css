@@ -1,0 +1,1358 @@
+/* .nrsHomePage {
+    position: absolute;
+} */
+
+.hr-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    color: #ffffff;
+
+    background: linear-gradient(105deg,
+            #a90008 0%,
+            #d10a12 40%,
+            #f1d5d2 65%,
+            #e5e8e9 100%);
+
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Red geometric background */
+.hr-red-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    z-index: 0;
+
+    background:
+        radial-gradient(circle,
+            rgba(255, 45, 45, 0.55) 1.5px,
+            transparent 2px) 0 0 / 18px 18px,
+        linear-gradient(130deg,
+            transparent 20%,
+            rgba(90, 0, 0, 0.35) 20% 40%,
+            transparent 40%),
+        linear-gradient(45deg,
+            #a90008,
+            #df1118);
+
+    clip-path: polygon(0 0,
+            100% 0,
+            80% 100%,
+            0 100%);
+}
+
+/* Left content */
+.hr-hero-copy {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 48%;
+    padding: 35px 0 35px 3.4%;
+    box-sizing: border-box;
+}
+
+/* Small heading */
+.hr-eyebrow {
+    margin: 0 0 18px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* Main heading */
+.hr-title {
+    margin: 0 0 18px;
+    color: #ffffff;
+    /* font-size: clamp(34px, 4.1vw, 64px); */
+    font-size: 42px;
+    font-weight: 750;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+}
+
+/* Description */
+.hr-description {
+    margin: 0;
+    color: #ffffff;
+    /* font-size: clamp(16px, 1.5vw, 23px); */
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Team image */
+.hr-team-photo {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 58%;
+    height: 100%;
+
+    background-image:
+        linear-gradient(90deg,
+            rgba(190, 0, 8, 0.25),
+            transparent 30%),
+        url('../assets/Banner.jpg');
+
+    background-size: cover;
+    background-position: center 43%;
+    background-repeat: no-repeat;
+
+    -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            #000000 15%);
+
+    mask-image: linear-gradient(to right,
+            transparent 0%,
+            #000000 15%);
+}
+
+
+/* ----------------------- */
+
+/* Main Container */
+.hr-hub-container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 32px 0 15px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202020;
+}
+
+/* Welcome Section */
+.hr-hero-label {
+    width: 100%;
+    margin-bottom: 36px;
+}
+
+/* Welcome Label */
+.hr-welcome-label {
+    color: #d00000;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    line-height: 20px;
+    margin-bottom: 8px;
+}
+
+/* Main Heading */
+.hr-hero-label h1 {
+    max-width: 850px;
+    font-size: 29px;
+    font-weight: 700;
+    line-height: 1.18;
+    color: #202020;
+    margin: 0 0 13px;
+}
+
+/* Welcome Description */
+.hr-desc {
+    max-width: 870px;
+    color: #505050;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 400;
+    margin: 0 0 19px;
+}
+
+/* Button Group */
+.hr-button-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Common Button Style */
+.hr-btn {
+    min-height: 45px;
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Primary Button */
+.hr-btn-primary {
+    background-color: #c90000;
+    color: #ffffff;
+    border: 1px solid #c90000;
+}
+
+.hr-btn-primary:hover {
+    background-color: #a90000;
+    border-color: #a90000;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Button Arrow */
+.hr-arrow {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+/* Outline Button */
+.hr-btn-outline {
+    background-color: #ffffff;
+    color: #c90000;
+    border: 1px solid #c90000;
+}
+
+.hr-btn-outline:hover {
+    background-color: #fff1f1;
+    color: #a90000;
+    text-decoration: none;
+}
+
+/* Explore Section */
+.hr-explore-section {
+    width: 100%;
+}
+
+.hr-explore-section h2 {
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #202020;
+    margin: 0 0 12px;
+}
+
+/* Explore Description */
+.hr-explore-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #505050;
+    margin: 0 0 13px;
+}
+
+/* Card Grid */
+.hr-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+}
+
+/* Individual Card */
+.hr-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    min-width: 0;
+    min-height: 87px;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Card Hover */
+.hr-card:hover {
+    border-color: #c90000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Card Icon Container */
+.hr-card-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+/* SVG Icons */
+.hr-card-icon svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: #d00000;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Card Text */
+.hr-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.hr-card-content h3 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #202020;
+    margin: 0 0 3px;
+}
+
+.hr-card-content p {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #505050;
+    margin: 0;
+}
+
+/* Tablet Layout */
+@media screen and (max-width: 1024px) {
+    .hr-hub-container {
+        padding: 25px 20px;
+    }
+
+    .hr-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hr-hero-label h1 {
+        font-size: 27px;
+    }
+}
+
+/* Mobile Layout */
+@media screen and (max-width: 600px) {
+    .hr-hub-container {
+        padding: 20px 15px;
+    }
+
+    .hr-hero-label h1 {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+
+    .hr-description {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .hr-card-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .hr-card {
+        min-height: 82px;
+        padding: 14px;
+    }
+
+    .hr-button-group {
+        align-items: stretch;
+    }
+
+    .hr-btn {
+        min-height: 44px;
+    }
+
+    .hr-explore-section h2 {
+        font-size: 19px;
+    }
+}
+
+
+
+/* Main Container */
+.policy-container {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 15px 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111111;
+}
+
+/* Common SVG Styling */
+.policy-container svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #d00000;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+/* ==============================
+   TOP FEATURE CARDS
+================================= */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 34px;
+}
+
+.feature-card {
+    min-width: 0;
+    min-height: 193px;
+    padding: 21px 22px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dedbd9;
+    border-top: 3px solid #d00000;
+    border-radius: 6px;
+}
+
+.feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 14px;
+    background-color: #f2f2f2;
+    border-radius: 9px;
+}
+
+.feature-card h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #111111;
+}
+
+.feature-card p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: #404040;
+}
+
+/* ==============================
+   CAREER JOURNEY SECTION
+================================= */
+
+.journey-section {
+    padding: 27px 26px 28px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 12px;
+}
+
+.journey-header {
+    margin-bottom: 19px;
+}
+
+.journey-header h2 {
+    margin: 0 0 7px;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #111111;
+}
+
+.journey-header p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #454545;
+}
+
+/* ==============================
+   CAREER STAGE CARDS
+================================= */
+
+.stage-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.stage-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    min-height: 190px;
+    padding: 20px 12px 17px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 11px;
+    transition: border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stage-card:hover {
+    border-color: #d00000;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Stage Number */
+.stage-number {
+    margin-bottom: 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #777777;
+}
+
+/* Red Circular Icon */
+.stage-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 13px;
+    background-color: #d00000;
+    border-radius: 50%;
+}
+
+.stage-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #ffffff;
+    stroke-width: 1.8;
+}
+
+/* Stage Heading */
+.stage-card h3 {
+    margin: 0 0 7px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #111111;
+}
+
+/* Stage Description */
+.stage-card p {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #454545;
+}
+
+/* ==============================
+   BOTTOM INFORMATION BANNER
+================================= */
+
+.policy-notice {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 46px;
+    margin-top: 18px;
+    padding: 11px 16px;
+    box-sizing: border-box;
+    background-color: #fff7f7;
+    border: 1px solid #ffcccc;
+    border-radius: 6px;
+}
+
+.policy-notice svg {
+    width: 15px;
+    height: 15px;
+}
+
+.policy-notice span {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333333;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+================================= */
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+
+    .policy-container {
+        padding: 15px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stage-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+
+    .policy-container {
+        padding: 10px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 22px;
+    }
+
+    .feature-card {
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .journey-section {
+        padding: 20px 14px;
+    }
+
+    .journey-header h2 {
+        font-size: 20px;
+    }
+
+    .journey-header p {
+        font-size: 13px;
+    }
+
+    .stage-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .stage-card {
+        min-height: 190px;
+        padding: 17px 9px;
+    }
+
+    .stage-card h3 {
+        font-size: 13px;
+    }
+
+    .stage-card p {
+        font-size: 12px;
+    }
+
+    .policy-notice {
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+}
+
+
+/* --- */
+
+/* Main Container */
+.hr-hub-container {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 18px 15px 16px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #171717;
+    background-color: #faf9f8;
+}
+
+/* Section Spacing */
+.hr-domain-section {
+    margin-bottom: 36px;
+}
+
+.hr-recent-section {
+    margin-bottom: 0;
+}
+
+/* Section Header */
+.hr-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 17px;
+}
+
+.hr-section-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #171717;
+}
+
+/* View All Link */
+.hr-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    color: #e00000;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.hr-view-all span {
+    font-size: 20px;
+    line-height: 12px;
+    color: #e00000;
+}
+
+.hr-view-all:hover {
+    text-decoration: underline;
+    color: #b00000;
+}
+
+/* Section Description */
+.hr-section-description {
+    margin: 0 0 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #555555;
+}
+
+/* HR Domain Grid */
+.hr-domain-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+/* HR Domain Card */
+.hr-domain-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    min-width: 0;
+    min-height: 90px;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 4px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hr-domain-card:hover {
+    border-color: #c9c4c1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Icon Box */
+.hr-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    background-color: #f2f2f2;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+/* SVG Icons */
+.hr-icon-box svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: #e00000;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Card Text */
+.hr-card-content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 1px;
+}
+
+.hr-card-content h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: #111111;
+    overflow-wrap: break-word;
+}
+
+.hr-card-content p {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #555555;
+    overflow-wrap: break-word;
+}
+
+/* Recently Updated Policies Grid */
+.hr-recent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+/* Policy Card */
+.hr-policy-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    min-width: 0;
+    min-height: 88px;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 4px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hr-policy-card:hover {
+    border-color: #c9c4c1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive: Tablets */
+@media screen and (max-width: 1024px) {
+    .hr-domain-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hr-recent-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Responsive: Mobile */
+@media screen and (max-width: 600px) {
+    .hr-hub-container {
+        padding: 16px 12px;
+    }
+
+    .hr-section-header {
+        align-items: flex-start;
+    }
+
+    .hr-section-header h2 {
+        font-size: 18px;
+    }
+
+    .hr-section-description {
+        font-size: 13px;
+    }
+
+    .hr-domain-grid,
+    .hr-recent-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .hr-domain-card,
+    .hr-policy-card {
+        min-height: 82px;
+        padding: 14px;
+    }
+
+    .hr-domain-section {
+        margin-bottom: 30px;
+    }
+}
+
+
+/* ----------- */
+
+/* Main Container */
+
+.hr-portal {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 12px 0 40px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111827;
+}
+
+.hr-portal * {
+    box-sizing: border-box;
+}
+
+/* HR Policy Banner */
+
+.policy-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 94px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border: 1px solid #dedbd9;
+    border-left: 5px solid #c90000;
+    border-radius: 4px;
+    gap: 20px;
+}
+
+.policy-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.policy-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    height: 52px;
+    background: #c90000;
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.policy-content h3 {
+    margin: 0 0 7px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.policy-content p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #374151;
+}
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 20px;
+    background: #c90000;
+    color: #ffffff;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.primary-button:hover {
+    background: #a80000;
+    color: #ffffff;
+}
+
+/* Latest News Section */
+
+.news-section {
+    margin-top: 37px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 12px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #111827;
+}
+
+.see-all {
+    color: #c90000;
+    font-size: 12px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.see-all span {
+    margin-left: 5px;
+    font-size: 19px;
+    font-weight: 700;
+    vertical-align: -1px;
+}
+
+/* News Grid */
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+/* News Cards */
+
+.news-card {
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-image,
+.leave-image,
+.az-image {
+    width: 100%;
+    height: 150px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.news-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Annual Leave Graphic */
+
+.leave-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(125deg,
+            transparent 0 49%,
+            rgba(255, 255, 255, 0.08) 49% 62%,
+            transparent 62% 72%,
+            rgba(0, 0, 0, 0.08) 72%),
+        #bd0000;
+}
+
+.leave-circle {
+    position: absolute;
+    top: 21px;
+    right: 30px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f7b879;
+}
+
+.calendar-icon {
+    position: relative;
+    width: 74px;
+    height: 62px;
+    margin-top: 13px;
+    border: 4px solid #ffffff;
+    border-radius: 8px;
+}
+
+.calendar-top {
+    position: absolute;
+    top: 12px;
+    left: -2px;
+    width: 70px;
+    height: 4px;
+    background: #ffffff;
+}
+
+.calendar-rings {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendar-rings span {
+    width: 4px;
+    height: 17px;
+    background: #ffffff;
+    border-radius: 3px;
+}
+
+.calendar-check {
+    position: absolute;
+    top: 18px;
+    left: 14px;
+    color: #ffffff;
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+/* A-Z Graphic */
+
+.az-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    background: linear-gradient(135deg, #666666, #292929);
+}
+
+.az-title {
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: -3px;
+}
+
+.az-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 17px;
+    width: 42%;
+    z-index: 1;
+}
+
+.az-lines span {
+    display: block;
+    width: 100%;
+    height: 6px;
+    background: #c90000;
+    border-radius: 5px;
+}
+
+.az-lines span:last-child {
+    width: 75%;
+}
+
+.az-dots {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    width: 80px;
+    height: 35px;
+    opacity: 0.16;
+    background-image: radial-gradient(#999999 3px, transparent 3px);
+    background-size: 20px 17px;
+}
+
+/* News Content */
+
+.news-content {
+    flex: 1;
+    padding: 15px 16px 16px;
+}
+
+.news-content h3 {
+    margin: 0 0 7px;
+    color: #111111;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.news-meta {
+    margin: 0 0 9px;
+    color: #555d6c;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.news-description {
+    margin: 0;
+    color: #505b6b;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+/* Quick Links */
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 34px;
+}
+
+.quick-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 111px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border: 1px solid #dedbd9;
+    border-radius: 4px;
+}
+
+.quick-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    background: #f3f3f3;
+    border-radius: 9px;
+    color: #c90000;
+}
+
+.question-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #c90000;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.message-icon {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.quick-content {
+    min-width: 0;
+}
+
+.quick-content h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #111111;
+}
+
+.quick-content p {
+    margin: 0 0 6px;
+    color: #505b6b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.quick-link {
+    color: #111827;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.quick-link span {
+    margin-left: 3px;
+    font-size: 17px;
+    vertical-align: -1px;
+}
+
+.quick-link:hover,
+.see-all:hover {
+    text-decoration: underline;
+}
+
+/* Tablet Responsive */
+
+@media screen and (max-width: 900px) {
+
+    .hr-portal {
+        padding: 15px;
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quick-links {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* Mobile Responsive */
+
+@media screen and (max-width: 600px) {
+
+    .policy-banner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px;
+    }
+
+    .policy-left {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .policy-content p {
+        font-size: 12px;
+    }
+
+    .primary-button {
+        width: 100%;
+    }
+
+    .news-section {
+        margin-top: 28px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+    }
+
+    .section-header h2 {
+        font-size: 18px;
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-image,
+    .leave-image,
+    .az-image {
+        height: 180px;
+    }
+
+    .quick-card {
+        padding: 16px;
+        gap: 12px;
+    }
+
+}
+
+
+/* ----- */
+
+#CommentsWrapper {
+    display: none;
+}
