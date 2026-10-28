@@ -83,7 +83,7 @@
     margin: 0;
     color: #ffffff;
     /* font-size: clamp(16px, 1.5vw, 23px); */
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.4;
 }
@@ -121,13 +121,12 @@
 
 /* Main Container */
 .hr-hub-container {
-    width: 100%;
-    max-width: 1140px;
+    width: 1150px;
     margin: 0 auto;
-    padding: 32px 0 15px;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     color: #202020;
+    margin-top: 8px;
 }
 
 /* Welcome Section */
@@ -138,12 +137,13 @@
 
 /* Welcome Label */
 .hr-welcome-label {
-    color: #d00000;
+    color: #C00000;
     font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
+    font-weight: bold;
+    letter-spacing: 1px;
     line-height: 20px;
     margin-bottom: 8px;
+    font-family: system-ui;
 }
 
 /* Main Heading */
@@ -665,7 +665,7 @@
 /* --- */
 
 /* Main Container */
-.hr-hub-container {
+.hr-domain-container {
     width: 100%;
     max-width: 1160px;
     margin: 0 auto;

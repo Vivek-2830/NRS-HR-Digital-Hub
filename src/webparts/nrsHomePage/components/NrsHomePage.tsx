@@ -44,13 +44,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
               </p>
             </div>
 
-            <div
-              className="hr-team-photo"
-              role="img"
-              aria-label="Human Capital Management Group team"
-            ></div>
-
-
+            <div className="hr-team-photo" role="img" aria-label="Human Capital Management Group team"></div>
 
           </div>
 
@@ -389,7 +383,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
         </div>
 
-        <div className="hr-hub-container">
+        <div className="hr-domain-container">
 
           <section className="hr-domain-section">
 
