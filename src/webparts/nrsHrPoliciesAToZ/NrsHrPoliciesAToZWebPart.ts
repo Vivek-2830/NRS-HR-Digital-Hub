@@ -14,6 +14,13 @@ import { INrsHrPoliciesAToZProps } from './components/INrsHrPoliciesAToZProps';
 
 export interface INrsHrPoliciesAToZWebPartProps {
   description: string;
+  bannerImageUrl: string;
+  bannerTitle: string;
+  breadcrumbHomeText: string;
+  breadcrumbHomeUrl: string;
+  breadcrumbCurrentText: string;
+  pageTitle: string;
+  pageDescription: string;
 }
 
 export default class NrsHrPoliciesAToZWebPart extends BaseClientSideWebPart<INrsHrPoliciesAToZWebPartProps> {
@@ -35,7 +42,16 @@ export default class NrsHrPoliciesAToZWebPart extends BaseClientSideWebPart<INrs
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        
+        bannerImageUrl: this.properties.bannerImageUrl,
+      bannerTitle: this.properties.bannerTitle,
+      breadcrumbHomeText: this.properties.breadcrumbHomeText,
+      breadcrumbHomeUrl: this.properties.breadcrumbHomeUrl,
+      breadcrumbCurrentText: this.properties.breadcrumbCurrentText,
+      pageTitle: this.properties.pageTitle,
+      pageDescription: this.properties.pageDescription
       }
     );
 
@@ -73,25 +89,76 @@ export default class NrsHrPoliciesAToZWebPart extends BaseClientSideWebPart<INrs
     return Version.parse('1.0');
   }
 
+  // protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+  //   return {
+  //     pages: [
+  //       {
+  //         header: {
+  //           description: strings.PropertyPaneDescription
+  //         },
+  //         groups: [
+  //           {
+  //             groupName: strings.BasicGroupName,
+  //             groupFields: [
+  //               PropertyPaneTextField('description', {
+  //                 label: strings.DescriptionFieldLabel
+  //               })
+  //             ]
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  // }
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
+  return {
+    pages: [
+      {
+        header: { description: 'HR Policies A to Z settings' },
+        groups: [
+          {
+            groupName: 'Banner',
+            groupFields: [
+              PropertyPaneTextField('bannerImageUrl', {
+                label: 'Banner image URL',
+                description: 'Paste the full or site-relative URL of the image'
+              }),
+              PropertyPaneTextField('bannerTitle', {
+                label: 'Banner title'
+              })
+            ]
           },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
-    };
-  }
+          {
+            groupName: 'Breadcrumb',
+            groupFields: [
+              PropertyPaneTextField('breadcrumbHomeText', {
+                label: 'Home link text'
+              }),
+              PropertyPaneTextField('breadcrumbHomeUrl', {
+                label: 'Home link URL'
+              }),
+              PropertyPaneTextField('breadcrumbCurrentText', {
+                label: 'Current page text'
+              })
+            ]
+          },
+          {
+            groupName: 'Page header',
+            groupFields: [
+              PropertyPaneTextField('pageTitle', {
+                label: 'Title'
+              }),
+              PropertyPaneTextField('pageDescription', {
+                label: 'Description',
+                multiline: true,
+                rows: 4
+              })
+            ]
+          }
+        ]
+      }
+    ]
+  };
+}
 }
