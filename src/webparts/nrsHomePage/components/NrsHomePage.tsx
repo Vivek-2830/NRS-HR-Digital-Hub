@@ -2,10 +2,34 @@ import * as React from 'react';
 import styles from './NrsHomePage.module.scss';
 import { INrsHomePageProps } from './INrsHomePageProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { sp } from '@pnp/sp/presets/all';
+import * as moment from 'moment';
+
+export interface INrsHomePageState {
+  ExploreQuickLinks: any;
+  PolicyPortalFeautures: any;
+  PolicyStageInfo: any;
+  HRDomainHub: any;
+  NewsAnnouncementsData: any;
+}
 
 require('../assets/style.css');
 
-export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> {
+export default class NrsHomePage extends React.Component<INrsHomePageProps, INrsHomePageState> {
+
+  constructor(props: INrsHomePageProps, state: INrsHomePageState) {
+
+    super(props);
+
+    this.state = {
+      ExploreQuickLinks: "",
+      PolicyPortalFeautures : "",
+      PolicyStageInfo : "",
+      HRDomainHub : "",
+      NewsAnnouncementsData : ""
+    };
+  }
+
   public render(): React.ReactElement<INrsHomePageProps> {
     const {
       description,
@@ -16,8 +40,10 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
     } = this.props;
 
     return (
-      <>
+      <div style={{ backgroundColor:'#faf9f8' }}>
+
         <div style={{ position: 'relative' }}>
+  
           <div className="nrsHomePage">
 
             <div className="hr-red-shapes"></div>
@@ -49,8 +75,10 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
           </div>
 
         </div>
+
         <div className="hr-hub-container">
 
+          {/* ------------ Welcom Section ---------------- */}
           <section className="hr-hero-label">
 
             <div className="hr-welcome-label">
@@ -86,18 +114,37 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
           </section>
 
+          {/* ------ Explore The Hub Link Section --------------- */}
           <section className="hr-explore-section">
 
             <h2>Explore the Hub</h2>
 
-            <p className="hr-explore-description">
-              Seven ways into the Hub, whatever you came to do.
-            </p>
+            <p className="hr-explore-description">Seven ways into the Hub, whatever you came to do.</p>
 
             <div className="hr-card-grid">
 
+              {
+                this.state.ExploreQuickLinks.length > 0 &&
+                this.state.ExploreQuickLinks.map((item) => {
+                  return (
+                    <a href={item.Link.Url} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <div className="hr-card">
 
-              <div className="hr-card">
+                        <div className="hr-card-icon">
+                          <img src={item.Icon} />
+                        </div>
+
+                        <div className="hr-card-content">
+                          <h3>{item.Title}</h3>
+                          <p>{item.Description}</p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })
+              }
+
+              {/* <div className="hr-card">
 
                 <div className="hr-card-icon">
                   <svg viewBox="0 0 24 24">
@@ -220,8 +267,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
                   <p>Search across every policy, procedure and form.</p>
                 </div>
 
-              </div>
-
+              </div> */}
 
             </div>
 
@@ -231,9 +277,25 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
         <div className="policy-container">
 
+          {/* ----------- Feature Grid ----------- */}
           <div className="feature-grid">
 
-            <div className="feature-card">
+            {
+              this.state.PolicyPortalFeautures.length > 0 &&
+                this.state.PolicyPortalFeautures.map((item) => {
+                  return (
+                    <div className="feature-card">
+                      <div className="feature-icon">
+                        <img src={item.Icon}/>
+                      </div>
+                      <h3>{item.Title}</h3>
+                      <p>{item.Description}</p>
+                    </div>
+                  );
+                })
+            }
+
+            {/* <div className="feature-card">
               <div className="feature-icon">
                 <svg viewBox="0 0 24 24">
                   <path d="M12 3L5 6V11C5 16 8 19 12 21C16 19 19 16 19 11V6L12 3Z"></path>
@@ -276,10 +338,11 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
               </div>
               <h3>Found in two minutes</h3>
               <p>Search the Hub, browse by HR domain, or open the full A to Z of policies.</p>
-            </div>
+            </div> */}
 
           </div>
 
+          {/* ------- JOURNEY SECTION ------- */}
           <div className="journey-section">
 
             <div className="journey-header">
@@ -292,7 +355,25 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
             <div className="stage-grid">
 
-              <div className="stage-card">
+              {
+                this.state.PolicyStageInfo.length > 0 &&
+                  this.state.PolicyStageInfo.map((item) => {
+                    return (
+                      <div className="stage-card">
+                        <span className="stage-number">{item.Stage}</span>
+
+                        <div className="stage-icon">
+                          <img src={item.StageIcon} alt={item.Title} />
+                        </div>
+
+                        <h3>{item.Title}</h3>
+                        <p>{item.Description}</p>
+                      </div>
+                    );
+                })
+              }
+
+              {/* <div className="stage-card">
                 <span className="stage-number">STAGE 01</span>
 
                 <div className="stage-icon">
@@ -364,7 +445,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
                 <h3>Move and move on</h3>
                 <p>Promotion, transfer, and leaving the Service well.</p>
-              </div>
+              </div> */}
 
             </div>
 
@@ -383,8 +464,10 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
         </div>
 
+        
         <div className="hr-domain-container">
 
+          {/* ------------- Browse Hr domain ------------------------  */}
           <section className="hr-domain-section">
 
             <div className="hr-section-header">
@@ -398,7 +481,26 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
             <div className="hr-domain-grid">
 
-              <div className="hr-domain-card">
+              {
+                this.state.HRDomainHub.length > 0 &&
+                  this.state.HRDomainHub.map((item) => {
+                    return (
+                      <a href={item.DomainLink.Url} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                        <div className="hr-domain-card">
+                          <div className="hr-domain-box">
+                            <img src={item.Icon}/>
+                          </div>
+                          <div className="hr-domian-content">
+                            <h3>{item.Title}</h3>
+                            <p>{item.PoliciesNumber}</p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })
+              }
+
+              {/* <div className="hr-domain-card">
                 <div className="hr-icon-box">
                   <svg viewBox="0 0 24 24">
                     <circle cx="10.5" cy="10.5" r="6"></circle>
@@ -568,11 +670,12 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
                   <h3>Exit &amp; Separation</h3>
                   <p>8 policies</p>
                 </div>
-              </div>
+              </div> */}
 
             </div>
           </section>
 
+          {/* ---------- Recent Update Doc ------------------ */}
           <section className="hr-recent-section">
 
             <div className="hr-section-header">
@@ -679,6 +782,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
             <a href="#" className="primary-button">Open the A to Z</a>
           </div>
 
+          {/* ----------------- News and Announcement Section ----------------- */}
           <section className="news-section">
 
             <div className="section-header">
@@ -688,7 +792,37 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
             <div className="news-grid">
 
-              <div className="news-card">
+              {
+                this.state.NewsAnnouncementsData.length > 0 &&
+                  this.state.NewsAnnouncementsData.map((item) => {
+                    return (
+                      <div className="news-card">
+
+                        <div className="news-image">
+                          <img
+                            src={item.NewsImage}
+                            alt="NRS team"
+                          />
+                        </div>
+
+                        <div className="news-content">
+                          <h3>{item.NewsTitle}</h3>
+
+                          <p className="news-meta">
+                            {item.NewsSource} · {moment(new Date(item.NewsDate)).format("MMMM DD, YYYY")}
+                          </p>
+
+                          <p className="news-description">
+                            {item.NewsDescription}
+                          </p>
+                        </div>
+
+                      </div>
+                    );
+                  })
+              }
+
+              {/* <div className="news-card">
 
                 <div className="news-image">
                   <img
@@ -771,7 +905,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
                   </p>
                 </div>
 
-              </div>
+              </div> */}
 
             </div>
 
@@ -819,8 +953,141 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, {}> 
 
         </div>
 
-
-      </>
+      </div>
     );
   }
+
+  public async componentDidMount() {
+    this.getExploreQuickLink();
+    this.getPolicyPortalFeautures();
+    this.getPolicyStageInfo();
+    this.getHRDomain();
+    this.getNewsAnnouncements();
+  }
+
+  public async getExploreQuickLink() {
+    const quick = await sp.web.lists.getByTitle("Explore the Hub").items.select(
+      "Title",
+      "Description",
+      "Icon",
+      "Link"
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Title: item.Title ? item.Title : "",
+            Description: item.Description ? item.Description : "",
+            Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/HRDomin.png`),
+            Link: item.Link ? item.Link : ""
+          });
+        });
+        this.setState({ ExploreQuickLinks: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error fetching Explore Quick Links: ", error);
+    });
+  }
+
+  public async getPolicyPortalFeautures() {
+    const plicyportal = await sp.web.lists.getByTitle("NRS Portal Features").items.select(
+      "Title",
+      "Description",
+      "Icon",
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Title: item.Title ? item.Title : "",
+            Description: item.Description ? item.Description : "",
+            Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/HRDomin.png`)
+          });
+        });
+        this.setState({ PolicyPortalFeautures: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error fetching Policy Portal Features: ", error);
+    });
+  }
+
+  public async getPolicyStageInfo() {
+    const policy = await sp.web.lists.getByTitle("Policy Stage").items.select(
+      "Stage",
+      "Title",
+      "Description",
+      "StageIcon",
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Stage: item.Stage ? item.Stage : "",
+            Title: item.Title ? item.Title : "",
+            Description: item.Description ? item.Description : "",
+            StageIcon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.StageIcon ? JSON.parse(item.StageIcon).serverRelativeUrl : require(`../assets/HRDomin.png`)
+          });
+        });
+        this.setState({ PolicyStageInfo: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error fetching Policy Stage Info: ", error);
+    });
+  }
+
+  public async getHRDomain() {
+    const hrdomain = await sp.web.lists.getByTitle("HR Domain Hub").items.select(
+      "Title",
+      "PoliciesNumber",
+      "Icon",
+      "DomainLink"
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Title: item.Title ? item.Title : "",
+            PoliciesNumber: item.PoliciesNumber ? item.PoliciesNumber : "",
+            Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/HRDomin.png`),
+            DomainLink: item.DomainLink ? item.DomainLink : ""
+          });
+        });
+        this.setState({ HRDomainHub: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error fetching HR Domain Hub Info: ", error);
+    });
+  }
+
+  public async getNewsAnnouncements() {
+    const news = await sp.web.lists.getByTitle("News and Announcements").items.select(
+      "NewsTitle",
+      "NewsSource",
+      "NewsDate",
+      "NewsDescription",
+      "NewsImage"
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            NewsTitle: item.NewsTitle ? item.NewsTitle : "",
+            NewsSource: item.NewsSource ? item.NewsSource : "",
+            NewsDescription: item.NewsDescription ? item.NewsDescription : "",
+            NewsImage: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.NewsImage ? JSON.parse(item.NewsImage).serverRelativeUrl : require(`../assets/HRDomin.png`),
+            NewsDate: item.NewsDate ? item.NewsDate : ""
+          });
+        });
+        this.setState({ NewsAnnouncementsData: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error fetching NewsAnnouncementsData Info: ", error);
+    });
+  }
+
 }

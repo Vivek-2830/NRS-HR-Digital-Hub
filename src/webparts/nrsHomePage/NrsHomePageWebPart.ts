@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'NrsHomePageWebPartStrings';
 import NrsHomePage from './components/NrsHomePage';
 import { INrsHomePageProps } from './components/INrsHomePageProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface INrsHomePageWebPartProps {
   description: string;
@@ -24,6 +25,10 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
+    sp.setup({
+      spfxContext: this.context
+    });
+
     return super.onInit();
   }
 
@@ -35,7 +40,8 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context
       }
     );
 
