@@ -11,6 +11,7 @@ export interface INrsHomePageState {
   PolicyStageInfo: any;
   HRDomainHub: any;
   NewsAnnouncementsData: any;
+  HRPolicieDoc: any;
 }
 
 require('../assets/style.css');
@@ -26,7 +27,8 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
       PolicyPortalFeautures : "",
       PolicyStageInfo : "",
       HRDomainHub : "",
-      NewsAnnouncementsData : ""
+      NewsAnnouncementsData : "",
+      HRPolicieDoc : ""
     };
   }
 
@@ -689,7 +691,30 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
             <div className="hr-recent-grid">
 
-              <div className="hr-policy-card">
+              {
+                this.state.HRPolicieDoc.length > 0 &&
+                  this.state.HRPolicieDoc.map((item) => {
+                    return (
+                      <a href={item.FileRef} target="_blank" rel="noopener noreferrer" data-interception="off" style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}>
+                        <div className="hr-policy-card">
+                          <div className="hr-icon-box">
+                            <svg viewBox="0 0 24 24">
+                              <path d="M6 3h9l4 4v14H6z"></path>
+                              <path d="M15 3v5h4"></path>
+                              <path d="M9 12h7M9 16h7"></path>
+                            </svg>
+                          </div>
+                          <div className="hr-card-content">
+                            <h3>{item.FileLeafRef}</h3>
+                            <p>{item.HRDomain} · Updated {moment(new Date(item.Modified)).format("DD MMM YYYY")}</p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })
+              }
+
+              {/* <div className="hr-policy-card">
                 <div className="hr-icon-box">
                   <svg viewBox="0 0 24 24">
                     <path d="M6 3h9l4 4v14H6z"></path>
@@ -757,7 +782,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
                   <h3>Grievance Policy &amp; Procedure</h3>
                   <p>Staff Union &amp; Conduct · Updated 01 Aug 2026</p>
                 </div>
-              </div>
+              </div> */}
 
             </div>
           </section>
@@ -934,7 +959,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
             <div className="quick-card">
 
               <div className="quick-icon">
-                <span className="message-icon">▤</span>
+                <span className="message-icon"><img src={require('../assets/Ask.png')} /></span>
               </div>
 
               <div className="quick-content">
@@ -963,6 +988,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
     this.getPolicyStageInfo();
     this.getHRDomain();
     this.getNewsAnnouncements();
+    this.getPoliciesData();
   }
 
   public async getExploreQuickLink() {
@@ -1089,5 +1115,42 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
       console.log("Error fetching NewsAnnouncementsData Info: ", error);
     });
   }
+
+  public async getPoliciesData() {
+  const data = await sp.web.lists
+    .getByTitle("HR Policies")
+    .items
+    .select(
+        "Id", "FileLeafRef", "FileRef", "Modified", "Editor/Title", "File_x0020_Type",  "File",
+        "EncodedAbsUrl", "File/ServerRelativeUrl","HRDomain/Title",
+      "HRDomain/Id"
+    )
+    .expand("Editor,File","HRDomain")
+    .filter("FSObjType eq 0")
+    .orderBy("Modified", false)
+    .top(10)
+    .get();
+
+  let AllData: any[] = [];
+
+  console.log(data);
+
+  if (data.length > 0) {
+    data.forEach((item) => {
+      AllData.push({
+        ID: item.ID ? item.ID : "",
+        FileLeafRef: item.FileLeafRef ? item.FileLeafRef : "",
+        FileRef: item.FileRef ? item.FileRef : "",
+        Modified: item.Modified ? item.Modified : "",
+        HRDomain: item.HRDomain ? item.HRDomain.Title : "",
+        HRDomainID: item.HRDomain ? item.HRDomain.Id : ""
+      });
+    });
+
+    this.setState({
+      HRPolicieDoc: AllData
+    });
+  }
+}
 
 }
