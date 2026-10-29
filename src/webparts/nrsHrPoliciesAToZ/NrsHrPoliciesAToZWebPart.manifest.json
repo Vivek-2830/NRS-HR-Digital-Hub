@@ -4,26 +4,30 @@
   "alias": "NrsHrPoliciesAToZWebPart",
   "componentType": "WebPart",
 
-  // The "*" signifies that the version should be taken from the package.json
   "version": "*",
   "manifestVersion": 2,
 
-  // If true, the component can only be installed on sites where Custom Script is allowed.
-  // Components that allow authors to embed arbitrary script code should set this to true.
-  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+
   "requiresCustomScript": false,
   "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
   "supportsThemeVariants": true,
   "supportsFullBleed": true,
 
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
     "group": { "default": "Other" },
     "title": { "default": "NRS HR Policies A To Z" },
     "description": { "default": "NRS HR Policies A To Z description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "NRS HR Policies A To Z"
+      "description": "NrsHrPoliciesAToZ",
+  "bannerImageUrl": "",
+  "bannerTitle": "HR Policies and Procedures",
+  "breadcrumbHomeText": "Home",
+  "breadcrumbHomeUrl": "/",
+  "breadcrumbCurrentText": "HR Policies A to Z",
+  "pageTitle": "HR Policies A to Z",
+  "pageDescription": "Every NRS HR policy in alphabetical order. Filter by HR domain, search the list, or select a policy to open its page."
     }
   }]
 }

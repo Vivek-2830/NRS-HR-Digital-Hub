@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Dependency directories
 node_modules
+fast-serve
 
 # Build generated files
 dist
@@ -31,3 +32,4 @@ obj
 
 # Styles Generated Code
 *.scss.ts
+*.scss.d.ts
