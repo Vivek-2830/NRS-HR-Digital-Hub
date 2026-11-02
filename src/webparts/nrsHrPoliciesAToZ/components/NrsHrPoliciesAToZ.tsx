@@ -14,7 +14,7 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
   const [domainFilter, setDomainFilter] = useState<string>('all');
   const [search, setSearch] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
-const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
+  const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
 
   // ---- Load data ----
   useEffect(() => {
@@ -22,10 +22,10 @@ const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
 
     Promise.all([service.getDomains(), service.getPolicies()])
       .then(([d, p]) => {
-  setDomains(d);
-  setPolicies(p);
-  setLoading(false);
-})
+        setDomains(d);
+        setPolicies(p);
+        setLoading(false);
+      })
       .catch(err => {
         console.error(err);
         setError('Unable to load policies. ' + (err.message || ''));
@@ -74,47 +74,47 @@ const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
     return letters.map(l => ({ letter: l, items: map[l] }));
   }, [policies, domainFilter, search, sortAsc]);
 
- const toggleLetter = (letter: string): void => {
-  setCollapsed(prev => ({ ...prev, [letter]: !prev[letter] }));
-};
+  const toggleLetter = (letter: string): void => {
+    setCollapsed(prev => ({ ...prev, [letter]: !prev[letter] }));
+  };
   // ---- Render ----
   return (
-    <div style={{backgroundColor:'#faf9f8'}}>
+    <div style={{ backgroundColor: '#faf9f8' }}>
       <div style={{ position: 'relative' }}>
-    <section className="nrsHrPoliciesAToZ">
-  <div className="nrsHomePage">
-    <div className="hr-red-shapes"></div>
+        <section className="nrsHrPoliciesAToZ">
+          <div className="nrsHomePage">
+            <div className="hr-red-shapes"></div>
 
-    <div className="hr-hero-copy">
-      <h1 className="hr-title">{props.bannerTitle}</h1>
-    </div>
+            <div className="hr-hero-copy">
+              <h1 className="hr-title">{props.bannerTitle}</h1>
+            </div>
 
-    <div
-      className="hr-team-photo"
-      role="img"
-      aria-label={props.bannerTitle}
-      style={
-        props.bannerImageUrl
-          ? { backgroundImage: `url("${props.bannerImageUrl}")` }
-          : undefined
-      }
-    ></div>
-  </div>
-</section>
+            <div
+              className="hr-team-photo"
+              role="img"
+              aria-label={props.bannerTitle}
+              style={
+                props.bannerImageUrl
+                  ? { backgroundImage: `url("${props.bannerImageUrl}")` }
+                  : undefined
+              }
+            ></div>
+          </div>
+        </section>
       </div>
 
-      <div className="page-container" style={{backgroundColor:'#faf9f8'}}>
-<div className="breadcrumb">
-  <a href={props.breadcrumbHomeUrl || '/'}>{props.breadcrumbHomeText}</a>
-  <span>/</span>
-  <span>{props.breadcrumbCurrentText}</span>
-</div>
+      <div className="page-container" style={{ backgroundColor: '#faf9f8' }}>
+        <div className="breadcrumb">
+          <a href={props.breadcrumbHomeUrl || '/'}>{props.breadcrumbHomeText}</a>
+          <span>/</span>
+          <span>{props.breadcrumbCurrentText}</span>
+        </div>
 
-<header className="page-header">
-  <h1>{props.pageTitle}</h1>
-  <p>{props.pageDescription}</p>
-  <div className="red-line"></div>
-</header>
+        <header className="page-header">
+          <h1>{props.pageTitle}</h1>
+          <p>{props.pageDescription}</p>
+          <div className="red-line"></div>
+        </header>
 
         <div className="policy-card">
           <div className="toolbar">
@@ -171,7 +171,7 @@ const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
 
                 <tbody id="policyTableBody">
                   {groups.map(g => {
-                   const open = isFiltering || !collapsed[g.letter];
+                    const open = isFiltering || !collapsed[g.letter];
                     return (
                       <React.Fragment key={g.letter}>
                         <tr className="alphabet-row" data-letter={g.letter}>
@@ -231,7 +231,7 @@ const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
         <div className="cards-container">
           <a href="#" className="hr-card">
             <div className="icon-box">
-             <img src={require('../assets/Faqicon1.png')} />
+              <img src={require('../assets/Faqicon1.png')} />
             </div>
             <div className="card-content">
               <h3 className="card-title">FAQs and Knowledge Base</h3>
@@ -244,7 +244,7 @@ const [collapsed, setCollapsed] = useState<{ [letter: string]: boolean }>({});
 
           <a href="#" className="hr-card">
             <div className="icon-box">
-             <img src={require('../assets/Faqicon2.png')} />
+              <img src={require('../assets/Faqicon2.png')} />
             </div>
             <div className="card-content">
               <h3 className="card-title">Ask HR</h3>

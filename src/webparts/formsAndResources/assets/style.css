@@ -1,0 +1,392 @@
+.formsAndResources {
+    height: 219px;
+    position: relative;
+}
+
+.hr-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    color: #ffffff;
+
+    background: linear-gradient(105deg,
+            #a90008 0%,
+            #d10a12 40%,
+            #f1d5d2 65%,
+            #e5e8e9 100%);
+
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Red geometric background */
+.hr-red-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    z-index: 0;
+
+    background:
+        radial-gradient(circle,
+            rgba(255, 45, 45, 0.55) 1.5px,
+            transparent 2px) 0 0 / 18px 18px,
+        linear-gradient(130deg,
+            transparent 20%,
+            rgba(90, 0, 0, 0.35) 20% 40%,
+            transparent 40%),
+        linear-gradient(45deg,
+            #a90008,
+            #df1118);
+
+    clip-path: polygon(0 0,
+            100% 0,
+            80% 100%,
+            0 100%);
+}
+
+/* Left content */
+.hr-hero-copy {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 48%;
+    padding: 78px 0 35px 3.4%;
+    box-sizing: border-box;
+}
+
+/* Small heading */
+.hr-eyebrow {
+    margin: 0 0 18px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* Main heading */
+.hr-title {
+    margin: 0 0 18px;
+    color: #ffffff;
+    /* font-size: clamp(34px, 4.1vw, 64px); */
+    font-size: 42px;
+    font-weight: 750;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+}
+
+/* Description */
+.hr-description {
+    margin: 0;
+    color: #ffffff;
+    /* font-size: clamp(16px, 1.5vw, 23px); */
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Team image */
+.hr-team-photo {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 58%;
+    height: 100%;
+
+    background-image:
+        linear-gradient(90deg,
+            rgba(190, 0, 8, 0.25),
+            transparent 30%),
+        url('../assets/Banner.jpg');
+
+    background-size: cover;
+    background-position: center 43%;
+    background-repeat: no-repeat;
+
+    -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            #000000 15%);
+
+    mask-image: linear-gradient(to right,
+            transparent 0%,
+            #000000 15%);
+}
+
+/* ------------------------------------------------ */
+
+.container {
+    max-width: 1156px;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* Breadcrumb */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    color: #34485e;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #34485e;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span:nth-child(2) {
+    color: #aaa;
+}
+
+/* Page Header */
+
+.page-header h1 {
+    font-size: 29px;
+    font-weight: 600;
+    color: #101820;
+    margin-bottom: 12px;
+}
+
+.page-header p {
+    font-size: 15px;
+    color: #34485e;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.red-line {
+    width: 64px;
+    height: 4px;
+    background-color: #c90012;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Resource Container */
+
+.resource-container {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #dedbd8;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+/* Toolbar */
+
+.toolbar {
+    min-height: 49px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border-bottom: 1px solid #e8e6e4;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filters select {
+    height: 32px;
+    min-width: 210px;
+    padding: 0 10px;
+    border: 1px solid #dedbd8;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #182b40;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.filters .type-filter {
+    min-width: 90px;
+}
+
+/* Search */
+
+.search-box {
+    width: 220px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background: #f2f1f0;
+    border-radius: 2px;
+}
+
+.search-icon {
+    font-size: 23px;
+    color: #777;
+    margin-right: 8px;
+    transform: rotate(-25deg);
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #182b40;
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: #526477;
+}
+
+/* Table */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background-color: #faf9f8;
+}
+
+th {
+    height: 38px;
+    padding: 10px 15px;
+    color: #14283c;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #e9e6e4;
+}
+
+td {
+    height: 43px;
+    padding: 10px 15px;
+    color: #34485e;
+    font-size: 13px;
+    border-bottom: 1px solid #e9e6e4;
+}
+
+tbody tr:hover {
+    background-color: #faf9f8;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Table Columns */
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 47%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 30%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 23%;
+}
+
+/* Download Link */
+
+td a {
+    text-decoration: none;
+    color: #34485e;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+td a:hover {
+    color: #c90012;
+}
+
+.download {
+    color: #d00012;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: calc(100% - 24px);
+        padding-top: 15px;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .filters {
+        width: 100%;
+    }
+
+    .filters select {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    table {
+        min-width: 700px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .page-header h1 {
+        font-size: 23px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters select {
+        width: 100%;
+        height: 36px;
+    }
+
+}

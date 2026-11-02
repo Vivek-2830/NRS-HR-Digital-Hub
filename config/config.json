@@ -33,6 +33,30 @@
           "manifest": "./src/webparts/nrsHrPoliciesAToZ/NrsHrPoliciesAToZWebPart.manifest.json"
         }
       ]
+    },
+    "forms-and-resources-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/formsAndResources/FormsAndResourcesWebPart.js",
+          "manifest": "./src/webparts/formsAndResources/FormsAndResourcesWebPart.manifest.json"
+        }
+      ]
+    },
+    "fa-qs-and-knowledge-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/faQsAndKnowledge/FaQsAndKnowledgeWebPart.js",
+          "manifest": "./src/webparts/faQsAndKnowledge/FaQsAndKnowledgeWebPart.manifest.json"
+        }
+      ]
+    },
+    "ask-hr-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/askHr/AskHrWebPart.js",
+          "manifest": "./src/webparts/askHr/AskHrWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -40,6 +64,9 @@
     "NrsHomePageWebPartStrings": "lib/webparts/nrsHomePage/loc/{locale}.js",
     "NrsFooterWebPartStrings": "lib/webparts/nrsFooter/loc/{locale}.js",
     "NrsHrDomainsWebPartStrings": "lib/webparts/nrsHrDomains/loc/{locale}.js",
-    "NrsHrPoliciesAToZWebPartStrings": "lib/webparts/nrsHrPoliciesAToZ/loc/{locale}.js"
+    "NrsHrPoliciesAToZWebPartStrings": "lib/webparts/nrsHrPoliciesAToZ/loc/{locale}.js",
+    "FormsAndResourcesWebPartStrings": "lib/webparts/formsAndResources/loc/{locale}.js",
+    "FaQsAndKnowledgeWebPartStrings": "lib/webparts/faQsAndKnowledge/loc/{locale}.js",
+    "AskHrWebPartStrings": "lib/webparts/askHr/loc/{locale}.js"
   }
 }
