@@ -1,7 +1,6 @@
+import { HrService } from '../components/HrService';
 export interface INrsHrDomainsProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
+    service: HrService;
+  categoryId: number;
+  siteUrl: string;
 }

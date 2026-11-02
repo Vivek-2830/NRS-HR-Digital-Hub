@@ -15,7 +15,7 @@ export interface IDomain {
 }
 
 const POLICY_LIBRARY = 'HR Policies';
-const DOMAIN_LIST = 'HRDomainHub';
+const DOMAIN_LIST = 'HR Domain Hub';
 const DOMAIN_FIELD = 'HRDomain';     // lookup internal name
 const TYPE_FIELD = 'PolicyType';     // choice internal name
 

@@ -3,70 +3,58 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneDropdown,
+  IPropertyPaneDropdownOption
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'NrsHrDomainsWebPartStrings';
 import NrsHrDomains from './components/NrsHrDomains';
+import { HrService } from './components/HrService';
+
 import { INrsHrDomainsProps } from './components/INrsHrDomainsProps';
 
 export interface INrsHrDomainsWebPartProps {
-  description: string;
+service: HrService;
+  categoryId: number;
+  siteUrl: string;
 }
 
 export default class NrsHrDomainsWebPart extends BaseClientSideWebPart<INrsHrDomainsWebPartProps> {
+  private service: HrService;
+  private options: IPropertyPaneDropdownOption[] = [];
+  private loadingOptions = false;
 
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
-
-  protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    return super.onInit();
+  protected async onInit(): Promise<void> {
+    this.service = new HrService(
+      this.context.spHttpClient,
+      this.context.pageContext.web.absoluteUrl
+    );
   }
 
   public render(): void {
-    const element: React.ReactElement<INrsHrDomainsProps> = React.createElement(
-      NrsHrDomains,
-      {
-        description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
-      }
-    );
-
+    const element: React.ReactElement<INrsHrDomainsProps> = React.createElement(NrsHrDomains, {
+      service: this.service,
+      categoryId: Number(this.properties.categoryId),
+      siteUrl: this.context.pageContext.web.absoluteUrl
+    });
     ReactDom.render(element, this.domElement);
-  }
-
-  private _getEnvironmentMessage(): string {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams
-      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-    }
-
-    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
-  }
-
-  protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-    if (!currentTheme) {
-      return;
-    }
-
-    this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
-    this.domElement.style.setProperty('--link', semanticColors.link);
-    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
-
   }
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
+  }
+
+  protected async onPropertyPaneConfigurationStart(): Promise<void> {
+    if (this.options.length || this.loadingOptions) return;
+    this.loadingOptions = true;
+    this.context.propertyPane.refresh();
+    try {
+      const domains = await this.service.getDomains();
+      this.options = domains.map(d => ({ key: d.Id, text: d.Title }));
+    } finally {
+      this.loadingOptions = false;
+      this.context.propertyPane.refresh();
+    }
   }
 
   protected get dataVersion(): Version {
@@ -77,15 +65,16 @@ export default class NrsHrDomainsWebPart extends BaseClientSideWebPart<INrsHrDom
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
+          header: { description: 'HR Domain settings' },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: 'Data',
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneDropdown('categoryId', {
+                  label: 'Category (HR Domain Hub)',
+                  options: this.options,
+                  selectedKey: this.properties.categoryId,
+                  disabled: this.loadingOptions
                 })
               ]
             }

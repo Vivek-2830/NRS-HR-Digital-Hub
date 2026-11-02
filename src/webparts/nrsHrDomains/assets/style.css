@@ -1,5 +1,6 @@
 .nrsHrDomains {
     height: 219px;
+    position: relative;
 }
 
 .hr-hero {
@@ -197,6 +198,7 @@
     font-size: 14px;
     line-height: 1.6;
     color: #315b83;
+    margin-bottom: 0;
 }
 
 .overview-box p+p {
@@ -220,7 +222,7 @@
     display: flex;
     align-items: flex-start;
     gap: 13px;
-    min-height: 97px;
+    /* min-height: 97px; */
     padding: 16px;
     background-color: #ffffff;
     border: 1px solid #dedbd9;
@@ -375,7 +377,7 @@
 
 /* Individual Resource Row */
 .resource-item {
-    min-height: 47px;
+    min-height: 28px;
     padding: 10px 16px 10px 18px;
     display: flex;
     align-items: center;
@@ -825,4 +827,9 @@
     .bottom-card {
         padding: 18px 15px;
     }
+}
+
+
+.resource-item img {
+    height: 20px;
 }
