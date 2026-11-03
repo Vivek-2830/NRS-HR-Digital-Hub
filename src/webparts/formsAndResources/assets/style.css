@@ -1,4 +1,4 @@
-.formsAndResources {
+.nrsHrDomains {
     height: 219px;
     position: relative;
 }
@@ -116,8 +116,6 @@
             transparent 0%,
             #000000 15%);
 }
-
-/* ------------------------------------------------ */
 
 .container {
     max-width: 1156px;
@@ -389,4 +387,105 @@ td a:hover {
         height: 36px;
     }
 
+}
+
+.hr-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.hr-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 111px;
+    padding: 20px 24px;
+    background-color: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease;
+}
+
+.hr-card:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.hr-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    background-color: #f2f2f2;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hr-icon svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: #ed1c24;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.hr-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hr-content h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111111;
+}
+
+.hr-content p {
+    margin: 0;
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.4;
+}
+
+.hr-content a {
+    width: fit-content;
+    text-decoration: none;
+    font-size: 13px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.hr-content a span {
+    font-size: 19px;
+    line-height: 10px;
+    margin-left: 3px;
+    vertical-align: -1px;
+}
+
+.hr-content a:hover {
+    color: #ed1c24;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 650px) {
+    .hr-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .hr-card {
+        padding: 18px;
+    }
 }

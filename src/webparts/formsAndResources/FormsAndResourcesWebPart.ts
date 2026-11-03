@@ -8,12 +8,18 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
+import { sp } from '@pnp/sp/presets/all';
+
 import * as strings from 'FormsAndResourcesWebPartStrings';
 import FormsAndResources from './components/FormsAndResources';
 import { IFormsAndResourcesProps } from './components/IFormsAndResourcesProps';
 
 export interface IFormsAndResourcesWebPartProps {
   description: string;
+  listTitle: string;
+  hrDomainField: string;
+  typeField: string;
+  nameField: string;
 }
 
 export default class FormsAndResourcesWebPart extends BaseClientSideWebPart<IFormsAndResourcesWebPartProps> {
@@ -24,7 +30,9 @@ export default class FormsAndResourcesWebPart extends BaseClientSideWebPart<IFor
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
-    return super.onInit();
+    return super.onInit().then(() => {
+      sp.setup({ spfxContext: this.context as any });
+    })
   }
 
   public render(): void {
@@ -35,7 +43,12 @@ export default class FormsAndResourcesWebPart extends BaseClientSideWebPart<IFor
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        siteUrl: this.context.pageContext.web.absoluteUrl.replace(/\/$/, ''),
+        listTitle: this.properties.listTitle || 'Forms and Resources',
+        hrDomainField: this.properties.hrDomainField || 'HRDomain',
+        typeField: this.properties.typeField || 'PoliceType',
+        nameField: this.properties.nameField || 'Title'
       }
     );
 
@@ -84,8 +97,17 @@ export default class FormsAndResourcesWebPart extends BaseClientSideWebPart<IFor
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('listTitle', {
+                  label: 'Document library name'
+                }),
+                PropertyPaneTextField('hrDomainField', {
+                  label: 'HR Domain column (lookup) - internal name'
+                }),
+                PropertyPaneTextField('typeField', {
+                  label: 'Type column (choice) - internal name'
+                }),
+                PropertyPaneTextField('nameField', {
+                  label: 'Name column (single line of text) - internal name'
                 })
               ]
             }
