@@ -277,6 +277,8 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
 
             </div>
 
+            <p className='view'>This is a SharePoint document library view. Forms are linked to their policies and can be filtered by domain and type. Downloads are indicative in this prototype.</p>
+
             <div className="hr-container">
 
               <div className="hr-card">
