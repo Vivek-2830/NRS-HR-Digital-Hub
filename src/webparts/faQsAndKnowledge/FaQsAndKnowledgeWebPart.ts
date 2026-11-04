@@ -11,9 +11,13 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'FaQsAndKnowledgeWebPartStrings';
 import FaQsAndKnowledge from './components/FaQsAndKnowledge';
 import { IFaQsAndKnowledgeProps } from './components/IFaQsAndKnowledgeProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IFaQsAndKnowledgeWebPartProps {
   description: string;
+  HelpTitle: string;
+  HelpDescription: string;
+  HRPortalLink: string;
 }
 
 export default class FaQsAndKnowledgeWebPart extends BaseClientSideWebPart<IFaQsAndKnowledgeWebPartProps> {
@@ -23,6 +27,10 @@ export default class FaQsAndKnowledgeWebPart extends BaseClientSideWebPart<IFaQs
 
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
+
+    sp.setup({
+      spfxContext: this.context
+    });
 
     return super.onInit();
   }
@@ -35,7 +43,11 @@ export default class FaQsAndKnowledgeWebPart extends BaseClientSideWebPart<IFaQs
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        HelpTitle: this.properties.HelpTitle,
+        HelpDescription: this.properties.HelpDescription,
+        HRPortalLink: this.properties.HRPortalLink
       }
     );
 
@@ -84,8 +96,15 @@ export default class FaQsAndKnowledgeWebPart extends BaseClientSideWebPart<IFaQs
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+               
+                PropertyPaneTextField('HelpTitle', {
+                  label: 'HelpTitle'
+                }),
+                PropertyPaneTextField('HelpDescription', {
+                  label: 'Help Description'
+                }),
+                PropertyPaneTextField('HRPortalLink', {
+                  label: 'HR Portal Link'
                 })
               ]
             }

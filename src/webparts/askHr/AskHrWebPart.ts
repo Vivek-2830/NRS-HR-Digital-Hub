@@ -11,9 +11,18 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'AskHrWebPartStrings';
 import AskHr from './components/AskHr';
 import { IAskHrProps } from './components/IAskHrProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IAskHrWebPartProps {
   description: string;
+  AskHRTitle: string;
+  AskHRDescription: string;
+  ServicePortalLink: string;
+  EscalationHeading: string;
+  EscalationDescription: string;
+  quickAnswer: string;
+  FAQsBaseQuestions: string;
+  BrowseFAQsLink: string;
 }
 
 export default class AskHrWebPart extends BaseClientSideWebPart<IAskHrWebPartProps> {
@@ -23,6 +32,10 @@ export default class AskHrWebPart extends BaseClientSideWebPart<IAskHrWebPartPro
 
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
+
+    sp.setup({
+      spfxContext: this.context
+    });
 
     return super.onInit();
   }
@@ -35,7 +48,16 @@ export default class AskHrWebPart extends BaseClientSideWebPart<IAskHrWebPartPro
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        AskHRTitle: this.properties.AskHRTitle,
+        AskHRDescription: this.properties.AskHRDescription,
+        ServicePortalLink: this.properties.ServicePortalLink,
+        EscalationHeading: this.properties.EscalationHeading,
+        EscalationDescription: this.properties.EscalationDescription,
+        quickAnswer: this.properties.quickAnswer,
+        FAQsBaseQuestions: this.properties.FAQsBaseQuestions,
+        BrowseFAQsLink: this.properties.BrowseFAQsLink
       }
     );
 
@@ -84,8 +106,29 @@ export default class AskHrWebPart extends BaseClientSideWebPart<IAskHrWebPartPro
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('AskHRTitle', {
+                  label: 'Ask HR Title'
+                }),
+                PropertyPaneTextField('AskHRDescription', {
+                  label: 'Ask HR Description'
+                }),
+                PropertyPaneTextField('ServicePortalLink', {
+                  label: 'Service Portal Link'
+                }),
+                PropertyPaneTextField('EscalationHeading', {
+                  label: 'Escalation Heading'
+                }),
+                PropertyPaneTextField('EscalationDescription', {
+                  label: 'Escalation Description'
+                }),
+                PropertyPaneTextField('quickAnswer', {
+                  label: 'Quick Answer'
+                }),
+                PropertyPaneTextField('FAQsBaseQuestions', {
+                  label: 'FAQs Base Questions'
+                }),
+                PropertyPaneTextField('BrowseFAQsLink', {
+                  label: 'Browse FAQs Link'
                 })
               ]
             }

@@ -401,23 +401,11 @@
     height: 39px;
 }
 
-.service-table th:first-child {
-    width: 22%;
-}
-
-.service-table th:nth-child(2) {
-    width: 52%;
-}
-
-.service-table th:last-child {
-    width: 26%;
-}
-
 .service-table td {
     padding: 13px 14px;
     vertical-align: top;
     line-height: 1.5;
-    color: #263449;
+    color: black;
     border-bottom: 1px solid #e6e6e6;
 }
 
@@ -427,10 +415,6 @@
 
 .service-table tbody tr:nth-child(even) {
     background: #fafafa;
-}
-
-.service-table tbody tr:last-child td {
-    border-bottom: none;
 }
 
 .service-table td strong {

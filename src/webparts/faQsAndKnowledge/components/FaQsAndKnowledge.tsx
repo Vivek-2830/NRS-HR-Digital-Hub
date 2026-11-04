@@ -2,33 +2,59 @@ import * as React from 'react';
 import styles from './FaQsAndKnowledge.module.scss';
 import { IFaQsAndKnowledgeProps } from './IFaQsAndKnowledgeProps';
 import { escape } from '@microsoft/sp-lodash-subset';
-import { sp } from '@pnp/sp';
+import { sp } from "@pnp/sp/presets/all";
 
 require('../assets/style.css');
 
 export interface IFaQsAndKnowledgeState {
-  FAQsDetailsData : any;
+  FAQsDetailsData: any;
+  DefinitionsData: any;
 }
 
-export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeProps,IFaQsAndKnowledgeState> {
+export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeProps, IFaQsAndKnowledgeState> {
 
   constructor(props: IFaQsAndKnowledgeProps, state: IFaQsAndKnowledgeState) {
-    
+
     super(props);
-    
+
     this.state = {
-      FAQsDetailsData: ""
+      FAQsDetailsData: "",
+      DefinitionsData: ""
     }
   }
 
+  private getGroupedFAQs() {
+
+    const groupedFAQs: { [key: string]: any[] } = {};
+
+    const faqData = Array.isArray(this.state.FAQsDetailsData)
+      ? this.state.FAQsDetailsData
+      : [];
+
+    faqData.forEach((item: any) => {
+
+      const faqType = item.FAQType || "Other";
+
+      if (!groupedFAQs[faqType]) {
+        groupedFAQs[faqType] = [];
+      }
+
+      groupedFAQs[faqType].push(item);
+
+    });
+
+    return groupedFAQs;
+  }
+
   public render(): React.ReactElement<IFaQsAndKnowledgeProps> {
+
     const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
+      HelpTitle,
+      HelpDescription,
+      HRPortalLink
     } = this.props;
+
+    const groupedFAQs = this.getGroupedFAQs();
 
     return (
 
@@ -67,115 +93,57 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
 
               <div className="faq-list">
 
-                <details className="faq-item">
-                  <summary>
-                    <div className="faq-title">
-                      <svg className="faq-icon" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <path d="M6 2h9l5 5v15H6z" />
-                        <path d="M14 2v6h6M9 13h8M9 17h8" />
-                      </svg>
-                      Using the Hub
+                {Object.keys(groupedFAQs).map((faqType, index) => (
+
+                  <details className="faq-item" key={faqType}>
+
+                    <summary>
+
+                      <div className="faq-title">
+
+                        <svg
+                          className="faq-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M6 2h9l5 5v15H6z" />
+                          <path d="M14 2v6h6M9 13h8M9 17h8" />
+                        </svg>
+
+                        {faqType}
+
+                      </div>
+
+                      <span className="faq-arrow">›</span>
+
+                    </summary>
+
+                    {/* Questions and Answers display together */}
+                    <div className="faq-content">
+
+                      {groupedFAQs[faqType].map((faq: any) => (
+
+                        <div className="faq-question-answer" key={faq.ID}>
+
+                          <h4 className="faq-question">
+                            {faq.Question}
+                          </h4>
+
+                          <p className="faq-answer">
+                            {faq.Answer}
+                          </p>
+
+                        </div>
+
+                      ))}
+
                     </div>
-                    <span className="faq-arrow">›</span>
-                  </summary>
 
-                  <div className="faq-content">
-                    <p>Find answers about using the HR Hub and navigating its features.</p>
-                    <ul>
-                      <li>How do I access the HR Hub?</li>
-                      <li>How can I find important HR information?</li>
-                    </ul>
-                  </div>
-                </details>
+                  </details>
 
-                <details className="faq-item">
-                  <summary>
-                    <div className="faq-title">
-                      <svg className="faq-icon" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <rect x="3" y="5" width="18" height="16" rx="2" />
-                        <path d="M16 3v4M8 3v4M3 10h18" />
-                      </svg>
-                      Leave and absence
-                    </div>
-                    <span className="faq-arrow">›</span>
-                  </summary>
-
-                  <div className="faq-content">
-                    <p>Information about annual leave, sick leave and other absences.</p>
-                    <ul>
-                      <li>How do I apply for annual leave?</li>
-                      <li>How do I report sickness absence?</li>
-                    </ul>
-                  </div>
-                </details>
-
-                <details className="faq-item">
-                  <summary>
-                    <div className="faq-title">
-                      <svg className="faq-icon" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M9 9a3 3 0 0 1 5.8 1c0 2-2.8 2.5-2.8 4" />
-                        <path d="M12 17h.01" />
-                      </svg>
-                      Pay and benefits
-                    </div>
-                    <span className="faq-arrow">›</span>
-                  </summary>
-
-                  <div className="faq-content">
-                    <p>Learn about salary, payroll, pensions and employee benefits.</p>
-                    <ul>
-                      <li>When will I receive my salary?</li>
-                      <li>Where can I view my payslip?</li>
-                    </ul>
-                  </div>
-                </details>
-
-                <details className="faq-item">
-                  <summary>
-                    <div className="faq-title">
-                      <svg className="faq-icon" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <path d="M12 3v18M5 6h14M5 6l-3 7h6L5 6zM19 6l-3 7h6l-3-7zM8 21h8" />
-                      </svg>
-                      Conduct and grievances
-                    </div>
-                    <span className="faq-arrow">›</span>
-                  </summary>
-
-                  <div className="faq-content">
-                    <p>Guidance on workplace conduct, policies and grievance procedures.</p>
-                    <ul>
-                      <li>How do I raise a grievance?</li>
-                      <li>Where can I find workplace policies?</li>
-                    </ul>
-                  </div>
-                </details>
-
-                <details className="faq-item">
-                  <summary>
-                    <div className="faq-title">
-                      <svg className="faq-icon" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <path d="M4 4h16v13H8l-4 4z" />
-                        <path d="M8 9h8M8 13h5" />
-                      </svg>
-                      Getting support
-                    </div>
-                    <span className="faq-arrow">›</span>
-                  </summary>
-
-                  <div className="faq-content">
-                    <p>Find out how to contact HR and get help with your questions.</p>
-                    <ul>
-                      <li>How can I contact the HR team?</li>
-                      <li>Where can I get additional support?</li>
-                    </ul>
-                  </div>
-                </details>
+                ))}
 
               </div>
             </div>
@@ -191,30 +159,14 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
 
             <div className="glossary-card">
 
-              <div className="glossary-item">
-                <h3>Effective date</h3>
-                <p>The date from which a policy formally applies.</p>
-              </div>
-
-              <div className="glossary-item">
-                <h3>Review date</h3>
-                <p>The date by which a policy must be reviewed to remain current.</p>
-              </div>
-
-              <div className="glossary-item">
-                <h3>Procedure</h3>
-                <p>The step by step how, sitting beneath a policy that sets out the what and the why.</p>
-              </div>
-
-              <div className="glossary-item">
-                <h3>Grievance</h3>
-                <p>A concern, problem or complaint an employee raises formally with the Service.</p>
-              </div>
-
-              <div className="glossary-item">
-                <h3>Probation</h3>
-                <p>The initial period in a role during which performance and suitability are assessed.</p>
-              </div>
+              {
+                this.state.DefinitionsData && this.state.DefinitionsData.map((item : any) => (
+                  <div className="glossary-item" key={item.ID}>
+                    <h3>{item.Title}</h3>
+                    <p>{item.Description}</p>
+                  </div>
+                ))
+              }
 
             </div>
           </div>
@@ -276,11 +228,11 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
               </div>
 
               <div className="help-content">
-                <h3>Still need help?</h3>
-                <p>If your question is not answered here, raise a request through the People Service Portal.</p>
+                <h3>{this.props.HelpTitle || 'Still need help?'}</h3>
+                <p>{this.props.HelpDescription || 'If your question is not answered here, raise a request through the People Service Portal.'}</p>
               </div>
 
-              <a href="#" className="ask-hr-btn">Ask HR</a>
+              <a href={this.props.HRPortalLink || '#'} className="ask-hr-btn">Ask HR</a>
 
             </div>
 
@@ -292,31 +244,53 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
     );
   }
 
-   public async componentDidMount() {
+  public async componentDidMount() {
     this.getFAQsRepository();
+    this.getDefinitionsData();
   }
 
   public async getFAQsRepository() {
-    const response = await sp.web.lists.getByTitle("FAQs").items.select(
-      "Question",
-      "Answer",
-      "FAQType"
-    ).get().then((data) =>{
-      let AllData = [];
-      if(data.length > 0) {
-        data.forEach((item) => {
-          AllData.push({
-            ID: item.ID ? item.ID : "",
-            Question: item.Question ? item.Question : "",
-            Answer: item.Answer ? item.Answer : "",
-            FAQType: item.FAQType ? item.FAQType : ""
-          });
-        });
-        this.setState({ FAQsDetailsData: AllData });
-      }
-    }).catch((error) => {
-      console.log("Error fetching FAQs data: ", error);
+    try {
+      const response = await sp.web.lists
+        .getByTitle("FAQs")
+        .items
+        .select("ID", "Question", "Answer", "FAQType")
+        .get();
+
+      const AllData = response.map((item: any) => ({
+        ID: item.ID || "",
+        Question: item.Question || "",
+        Answer: item.Answer || "",
+        FAQType: item.FAQType || ""
+      }));
+
+      this.setState({
+        FAQsDetailsData: AllData
+      });
+
+      console.log("FAQs Data:", AllData);
+
+    } catch (error) {
+      console.log("Error fetching FAQs:", error);
+    }
+  }
+
+  public async getDefinitionsData() {
+    const glossary = await sp.web.lists.getByTitle("Definitions and glossary").items.select(
+      "ID","Title", "Description"
+    ).get();
+
+    const AllData = glossary.map((item: any) => ({
+      ID: item.ID || "",
+      Title: item.Title || "",
+      Description: item.Description || ""
+    }));
+
+    this.setState({
+      DefinitionsData: AllData
     });
+
+    console.log("Definitions Data:", AllData);
   }
 
 }

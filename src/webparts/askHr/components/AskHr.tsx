@@ -7,6 +7,8 @@ import { sp } from '@pnp/sp';
 require('../assets/style.css');
 
 export interface IAskHrState {
+  ReachOutDetails: any;
+  WhatToExpectDetails: any;
 }
 
 export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
@@ -16,10 +18,11 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
     super(props);
 
     this.state = {
+      ReachOutDetails: "",
+      WhatToExpectDetails: ""
     }
 
   }
-
 
   public render(): React.ReactElement<IAskHrProps> {
     const {
@@ -62,19 +65,19 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
 
             <div className="ask-hr-banner">
               <div className="banner-icon">
-                <span>▤</span>
+                <span><img src={require('../assets/Ask.png')}/></span>
               </div>
 
               <div className="banner-content">
-                <h2>Ask HR</h2>
+                <h2>{this.props.AskHRTitle || "Ask HR"}</h2>
                 <p>
-                  Submit a question or request through the People Service Portal, the Service HR helpdesk, and track it to resolution.
+                  {this.props.AskHRDescription || "Submit a question or request through the People Service Portal, the Service HR helpdesk, and track it to resolution."}
                 </p>
               </div>
 
-              <a href="#" className="portal-button">
+              <a href={this.props.ServicePortalLink || "#"} className="portal-button">
                 Open the People Service Portal
-                <span>↗</span>
+                <span><img src={require('../assets/Next.png')}/></span>
               </a>
             </div>
 
@@ -83,36 +86,18 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
 
               <div className="contact-grid">
 
-                <div className="contact-card">
-                  <div className="card-icon">▤</div>
-                  <h3>People Service Portal</h3>
-                  <p>Log and track an HR request.</p>
-                  <a href="#">Ask HR, above</a>
-                </div>
-
-
-                <div className="contact-card">
-                  <div className="card-icon">▤</div>
-                  <h3>Email HR</h3>
-                  <p>For general queries and document requests.</p>
-                  <a href="mailto:peopleservices@nrs.gov.ng">
-                    peopleservices@nrs.gov.ng
-                  </a>
-                </div>
-
-                <div className="contact-card">
-                  <div className="card-icon">♧</div>
-                  <h3>Call HR</h3>
-                  <p>Monday to Friday, 8am to 5pm.</p>
-                  <a href="tel:08006774264">0800 NRS HCMG</a>
-                </div>
-
-                <div className="contact-card">
-                  <div className="card-icon">♧</div>
-                  <h3>Visit in person</h3>
-                  <p>People Services, NRS Corporate Headquarters.</p>
-                  <a href="#">Revenue House, Abuja</a>
-                </div>
+                {
+                  this.state.ReachOutDetails.length > 0 && this.state.ReachOutDetails.map((item: any) => {
+                    return (
+                      <div className="contact-card">
+                        <div className="card-icon"><img src={item.Icon} /></div>
+                        <h3>{item.Title}</h3>
+                        <p>{item.Description}</p>
+                        <a href="#">{item.ContactType}</a>
+                      </div>
+                    )
+                  })
+                }
 
               </div>
             </section>
@@ -132,35 +117,29 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
                     <th>Response standard</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Tier 1</strong> Transactional</td>
-                    <td>Routine requests such as letters, records updates and policy queries.</td>
-                    <td>
-                      Acknowledged within 1 working day.<br />
-                        Resolved within 3 working days.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Tier 2</strong> Advisory</td>
-                    <td>Case managed matters such as grievance intake and benefits queries.</td>
-                    <td>Resolved within 10 working days, unless escalated.</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Tier 3</strong> Strategic</td>
-                    <td>Complex or senior matters needing specialist HR input.</td>
-                    <td>Managed individually with agreed timelines.</td>
-                  </tr>
-                </tbody>
+                {
+                  this.state.WhatToExpectDetails.length > 0 &&
+                  this.state.WhatToExpectDetails.map((item: any) => {
+                    return (
+                      <tbody>
+                        <tr>
+                          <td>{item.Servicetier}</td>
+                          <td>{item.Whatitcovers}</td>
+                          <td>
+                            {item.Responsestandard}
+                          </td>
+                        </tr>
+                      </tbody>
+                    )
+                  })
+                }
               </table>
             </div>
 
             <div className="escalation-box">
-              <h3>Escalation</h3>
+              <h3>{this.props.EscalationHeading || "Escalation"}</h3>
               <p>
-                If your request is not resolved within the service standard above,
-                ask for it to be escalated to the Director, Workforce Management
-                through the People Service Portal.
+                {this.props.EscalationDescription || "If your request is not resolved within the service standard above, ask for it to be escalated to the Director, Workforce Management through the People Service Portal."}
               </p>
             </div>
 
@@ -171,13 +150,11 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
               </div>
 
               <div className="faq-content">
-                <h3>Looking for a quick answer?</h3>
-                <p>
-                  The FAQs and Knowledge Base cover the questions we are asked most across HR.
-                </p>
+                <h3>{this.props.quickAnswer || "Looking for a quick answer?"}</h3>
+                <p>{this.props.FAQsBaseQuestions || "The FAQs and Knowledge Base cover the questions we are asked most across HR."}</p>
               </div>
 
-              <a href="#" className="faq-button">
+              <a href={this.props.BrowseFAQsLink || "#"} className="faq-button">
                 Browse the FAQs
               </a>
 
@@ -189,6 +166,42 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
       </>
 
     );
+  }
+
+  public async componentDidMount() {
+    this.getReachOutDetails();
+    this.getWhatToExpactDetails();
+  }
+
+  public async getReachOutDetails() {
+    const waysout = await sp.web.lists.getByTitle("Other Ways to Ask HR").items.select(
+      "ID","Title","Description","ContactType","Icon"
+    ).expand("AttachmentFiles").get();
+
+    const AllData = waysout.map((item: any) => ({
+      ID: item.ID || "",
+      Title: item.Title || "",
+      Description: item.Description || "",
+      ContactType: item.ContactType || "",
+      Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/Ask.png`)
+    }));
+
+    this.setState({ ReachOutDetails: AllData });
+  }
+
+  public async getWhatToExpactDetails() {
+    const response = await sp.web.lists.getByTitle("What to expect").items.select(
+      "ID","Servicetier","Whatitcovers","Responsestandard"
+    ).get();
+
+    const AllData = response.map((item: any) => ({
+      ID: item.ID || "",
+      Servicetier: item.Servicetier || "",
+      Whatitcovers: item.Whatitcovers || "",
+      Responsestandard: item.Responsestandard || ""
+    }));
+
+    this.setState({ WhatToExpectDetails: AllData });
   }
 
 }
