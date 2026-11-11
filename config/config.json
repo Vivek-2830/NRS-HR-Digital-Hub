@@ -57,6 +57,14 @@
           "manifest": "./src/webparts/askHr/AskHrWebPart.manifest.json"
         }
       ]
+    },
+    "nrs-hr-domain-subpage-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/nrsHrDomainSubpage/NrsHrDomainSubpageWebPart.js",
+          "manifest": "./src/webparts/nrsHrDomainSubpage/NrsHrDomainSubpageWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -67,6 +75,7 @@
     "NrsHrPoliciesAToZWebPartStrings": "lib/webparts/nrsHrPoliciesAToZ/loc/{locale}.js",
     "FormsAndResourcesWebPartStrings": "lib/webparts/formsAndResources/loc/{locale}.js",
     "FaQsAndKnowledgeWebPartStrings": "lib/webparts/faQsAndKnowledge/loc/{locale}.js",
-    "AskHrWebPartStrings": "lib/webparts/askHr/loc/{locale}.js"
+    "AskHrWebPartStrings": "lib/webparts/askHr/loc/{locale}.js",
+    "NrsHrDomainSubpageWebPartStrings": "lib/webparts/nrsHrDomainSubpage/loc/{locale}.js"
   }
 }

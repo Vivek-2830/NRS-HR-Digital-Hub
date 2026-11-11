@@ -168,7 +168,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
     const filtered = this.getFilteredItems();
 
     return (
-      <>
+      <div id="formsandresources">
         <section className="nrsHrDomains">
           <div className="nrsHomePage">
             <div className="hr-red-shapes"></div>
@@ -321,7 +321,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
           </section>
         </div>
         
-      </>
+      </div>
 
     )
   }

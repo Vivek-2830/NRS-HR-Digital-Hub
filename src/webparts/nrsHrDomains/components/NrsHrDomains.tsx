@@ -104,7 +104,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
   const title = current ? current.Title : '';
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div id='domainpage' style={{ position: 'relative' }}>
       {/* Hero */}
       <section className="nrsHrDomains">
         <div className="nrsHomePage">

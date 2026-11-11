@@ -1,3 +1,10 @@
+@import url('https://fonts.cdnfonts.com/css/tahoma');
+
+
+#domainpage{
+    font-family: 'Tahoma', sans-serif !important;  
+}
+
 .nrsHrDomains {
     height: 219px;
     position: relative;

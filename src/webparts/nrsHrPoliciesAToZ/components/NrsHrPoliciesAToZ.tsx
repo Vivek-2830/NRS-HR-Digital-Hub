@@ -79,7 +79,7 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
   };
   // ---- Render ----
   return (
-    <div style={{ backgroundColor: '#faf9f8' }}>
+    <div id='HrPoliciesAToZ' style={{ backgroundColor: '#faf9f8' }}>
       <div style={{ position: 'relative' }}>
         <section className="nrsHrPoliciesAToZ">
           <div className="nrsHomePage">

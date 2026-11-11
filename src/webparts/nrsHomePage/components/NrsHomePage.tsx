@@ -42,7 +42,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
     } = this.props;
 
     return (
-      <div style={{ backgroundColor:'#faf9f8' }}>
+      <div id='Homepage' style={{ backgroundColor:'#faf9f8'}}>
 
         <div style={{ position: 'relative' }}>
   
