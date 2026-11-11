@@ -60,7 +60,7 @@
 /* Small heading */
 .hr-eyebrow {
     margin: 5px 0 9px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 2px;
     line-height: 1.4;
@@ -310,7 +310,11 @@
     line-height: 1.4;
     color: #252423;
     margin: 0 0 3px;
-    padding: 15px 0px 20px 37px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
 }
 
 .hr-card-content p {

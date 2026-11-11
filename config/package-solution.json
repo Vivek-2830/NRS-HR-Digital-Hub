@@ -3,7 +3,7 @@
   "solution": {
     "name": "nrs-hr-digital-hub-client-side-solution",
     "id": "8dc877bf-14fd-4799-8164-fb86ed691c4f",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
