@@ -293,7 +293,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
                 <div className="hr-content">
                   <h3>FAQs and Knowledge Base</h3>
                   <p>Quick answers for this area of HR.</p>
-                  <a href="#">
+                  <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">
                     Go to FAQs <span>›</span>
                   </a>
                 </div>
@@ -310,7 +310,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
                 <div className="hr-content">
                   <h3>Ask HR</h3>
                   <p>Raise a query through the People Service Portal.</p>
-                  <a href="#">
+                  <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">
                     Ask HR <span>›</span>
                   </a>
                 </div>

@@ -13,6 +13,14 @@ export interface IPolicyDoc {
   FileRef: string;
   PolicyType: string;
   HRDomain?: { Id: number; Title: string };
+  // document control – change to your real internal column names
+  Overview?: string;
+  Reference?: string;
+  PolicyVersion?: string;
+  ApprovalDate?: string;
+  EffectiveDate?: string;
+  NextReview?: string;
+  DocOwner?: string;
 }
 
 export class HrService {
@@ -44,4 +52,15 @@ export class HrService {
       `&$orderby=Title&$top=500`
     );
   }
+
+public async getPolicy(id: number): Promise<IPolicyDoc> {
+  const url =
+    `${this.siteUrl}/_api/web/lists/getbytitle('${this.library}')/items(${id})` +
+    `?$select=Id,Title,FileLeafRef,FileRef,PolicyType,Overview,Reference,PolicyVersion,` +
+    `ApprovalDate,EffectiveDate,NextReview,DocOwner,HRDomain/Id,HRDomain/Title` +
+    `&$expand=HRDomain`;
+  const res = await this.http.get(url, SPHttpClient.configurations.v1);
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return (await res.json()) as IPolicyDoc;
+}
 }

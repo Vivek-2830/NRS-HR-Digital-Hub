@@ -22,7 +22,7 @@ const downloadUrl = (site: string, fileRef: string): string =>
   `${site}/_layouts/15/download.aspx?SourceUrl=${encodeURIComponent(fileRef)}`;
 
 const DocIcon = (): JSX.Element => (
-<img src={require('../assets/fileicon.png')} />
+  <img src={require('../assets/fileicon.png')} />
 );
 
 const DownloadIcon = (): JSX.Element => (
@@ -61,6 +61,7 @@ const ResourceSection: React.FC<{ title: string; docs: IPolicyDoc[]; siteUrl: st
 };
 
 const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteUrl }) => {
+  const policyPage = `${siteUrl}/SitePages/Policy.aspx`; // your subpage URL
   const [domains, setDomains] = React.useState<IDomain[]>([]);
   const [docs, setDocs] = React.useState<IPolicyDoc[]>([]);
   const [loading, setLoading] = React.useState(false);
@@ -70,29 +71,29 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
     service.getDomains().then(setDomains).catch(e => setError(e.message));
   }, [service]);
 
- React.useEffect(() => {
-  if (!categoryId) { setDocs([]); return; }
+  React.useEffect(() => {
+    if (!categoryId) { setDocs([]); return; }
 
-  let cancelled = false;
-  setLoading(true);
-  setError('');
+    let cancelled = false;
+    setLoading(true);
+    setError('');
 
-  service.getDocs(categoryId)
-    .then(result => {
-      if (!cancelled) {
-        setDocs(result);
-        setLoading(false);
-      }
-    })
-    .catch(e => {
-      if (!cancelled) {
-        setError(e.message);
-        setLoading(false);
-      }
-    });
+    service.getDocs(categoryId)
+      .then(result => {
+        if (!cancelled) {
+          setDocs(result);
+          setLoading(false);
+        }
+      })
+      .catch(e => {
+        if (!cancelled) {
+          setError(e.message);
+          setLoading(false);
+        }
+      });
 
-  return () => { cancelled = true; };
-}, [service, categoryId]);
+    return () => { cancelled = true; };
+  }, [service, categoryId]);
 
   if (!categoryId) return <div>Select a category in the web part property pane.</div>;
   if (error) return <div role="alert">Error: {error}</div>;
@@ -156,12 +157,18 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
         {policies.length > 0 && (
           <section className="policies-section">
             <h2 className="section-heading">
-             <img src={require('../assets/fileicon.png')} />
+              <img src={require('../assets/fileicon.png')} />
               <span>Policies</span>
             </h2>
             <div className="policies-grid">
               {policies.map(p => (
-                <a key={p.Id} href={p.FileRef} className="policy-card" target="_blank" rel="noreferrer" data-interception="off">
+                // <a key={p.Id} href={p.FileRef} className="policy-card" target="_blank" rel="noreferrer" data-interception="off">
+                <a
+                  key={p.Id}
+                  href={`${policyPage}?policyId=${p.Id}`}
+                  className="policy-card"
+                  data-interception="off"
+                >
                   <div className="document-icon">
                     <svg viewBox="0 0 24 24">
                       <path d="M6 3h8l4 4v14H6z"></path>
@@ -260,7 +267,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
             <div className="bottom-content">
               <h3>FAQs and Knowledge Base</h3>
               <p>Quick answers for this area of HR.</p>
-              <a href="#" className="bottom-link">Go to FAQs <i className="fa-solid fa-caret-right"></i></a>
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx" className="bottom-link">Go to FAQs <i className="fa-solid fa-caret-right"></i></a>
             </div>
           </div>
           <div className="bottom-card">
@@ -268,7 +275,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
             <div className="bottom-content">
               <h3>Ask HR</h3>
               <p>Raise a query through the People Service Portal.</p>
-              <a href="#" className="bottom-link">Ask HR <i className="fa-solid fa-caret-right"></i></a>
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-link">Ask HR <i className="fa-solid fa-caret-right"></i></a>
             </div>
           </div>
         </section>

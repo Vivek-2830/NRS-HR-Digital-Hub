@@ -273,7 +273,8 @@
   /* ---------- Related policies ---------- */
   .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 12px; }
   .related a {
-    display: flex; align-items: center; gap: 14px;
+    /* display: flex;  */
+    align-items: center; gap: 14px;
     height: 49px; padding: 0 20px;
     background: var(--card);
     border: 1px solid var(--line);

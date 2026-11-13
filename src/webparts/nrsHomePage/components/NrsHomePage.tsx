@@ -949,7 +949,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
                 <p>Quick answers, definitions and guidance across HR.</p>
 
-                <a href="#" className="quick-link">
+                <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx" className="quick-link">
                   Go to FAQs <span>›</span>
                 </a>
               </div>
@@ -967,7 +967,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
                 <p>Raise a query through the People Service Portal.</p>
 
-                <a href="#" className="quick-link">
+                <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="quick-link">
                   Ask HR <span>›</span>
                 </a>
               </div>
