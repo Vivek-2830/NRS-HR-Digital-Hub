@@ -77,8 +77,12 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
         <span className="chip">{domain}</span>
         <div className="rule"></div>
 
-        {policy.Overview && (
-          <div className="lead" dangerouslySetInnerHTML={{ __html: policy.Overview }} />
+        {policy.PolicyOverview && (
+          <div className="lead" 
+          // dangerouslySetInnerHTML={{ __html: policy.Overview }} 
+          >
+            {policy.PolicyOverview}
+            </div>
         )}
 
         <div className="layout">

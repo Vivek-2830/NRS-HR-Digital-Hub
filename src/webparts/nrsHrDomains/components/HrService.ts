@@ -14,7 +14,7 @@ export interface IPolicyDoc {
   PolicyType: string;
   HRDomain?: { Id: number; Title: string };
   // document control – change to your real internal column names
-  Overview?: string;
+  PolicyOverview?: string;
   Reference?: string;
   PolicyVersion?: string;
   ApprovalDate?: string;
@@ -56,7 +56,7 @@ export class HrService {
 public async getPolicy(id: number): Promise<IPolicyDoc> {
   const url =
     `${this.siteUrl}/_api/web/lists/getbytitle('${this.library}')/items(${id})` +
-    `?$select=Id,Title,FileLeafRef,FileRef,PolicyType,Overview,Reference,PolicyVersion,` +
+    `?$select=Id,Title,FileLeafRef,FileRef,PolicyType,PolicyOverview,Reference,PolicyVersion,` +
     `ApprovalDate,EffectiveDate,NextReview,DocOwner,HRDomain/Id,HRDomain/Title` +
     `&$expand=HRDomain`;
   const res = await this.http.get(url, SPHttpClient.configurations.v1);
