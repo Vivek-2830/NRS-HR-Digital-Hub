@@ -107,6 +107,8 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
         <div className="breadcrumb">
           <a href={props.breadcrumbHomeUrl || '/'}>{props.breadcrumbHomeText}</a>
           <span>/</span>
+          <span>HR Policies & Procedures</span>
+          <span>/</span>
           <span>{props.breadcrumbCurrentText}</span>
         </div>
 
