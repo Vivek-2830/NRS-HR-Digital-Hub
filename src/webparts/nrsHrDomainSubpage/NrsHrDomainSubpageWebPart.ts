@@ -6,63 +6,42 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'NrsHrDomainSubpageWebPartStrings';
 import NrsHrDomainSubpage from './components/NrsHrDomainSubpage';
 import { INrsHrDomainSubpageProps } from './components/INrsHrDomainSubpageProps';
+import { HrService } from '../nrsHrDomains/components/HrService';
 
 export interface INrsHrDomainSubpageWebPartProps {
-  description: string;
+  homeUrl: string;
+  domainPageUrl: string;
+  hubList: string;
+  library: string;
 }
 
 export default class NrsHrDomainSubpageWebPart extends BaseClientSideWebPart<INrsHrDomainSubpageWebPartProps> {
 
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
-
-  protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    return super.onInit();
-  }
-
   public render(): void {
+    const siteUrl: string = this.context.pageContext.web.absoluteUrl;
+
+    const service: HrService = new HrService(
+      this.context.spHttpClient,
+      siteUrl,
+      this.properties.hubList || 'HR Domain Hub',
+      this.properties.library || 'HR Policies'
+    );
+
     const element: React.ReactElement<INrsHrDomainSubpageProps> = React.createElement(
       NrsHrDomainSubpage,
       {
-        description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        service,
+        siteUrl,
+        homeUrl: this.properties.homeUrl || siteUrl,
+        domainPageUrl: this.properties.domainPageUrl || undefined
       }
     );
 
     ReactDom.render(element, this.domElement);
-  }
-
-  private _getEnvironmentMessage(): string {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams
-      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-    }
-
-    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
-  }
-
-  protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-    if (!currentTheme) {
-      return;
-    }
-
-    this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
-    this.domElement.style.setProperty('--link', semanticColors.link);
-    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
-
   }
 
   protected onDispose(): void {
@@ -84,8 +63,19 @@ export default class NrsHrDomainSubpageWebPart extends BaseClientSideWebPart<INr
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('homeUrl', {
+                  label: 'Home page URL (breadcrumb)'
+                }),
+                PropertyPaneTextField('domainPageUrl', {
+                  label: 'HR Domains page URL (breadcrumb)'
+                }),
+                PropertyPaneTextField('hubList', {
+                  label: 'Domain hub list title',
+                  placeholder: 'HR Domain Hub'
+                }),
+                PropertyPaneTextField('library', {
+                  label: 'Policies library title',
+                  placeholder: 'HR Policies'
                 })
               ]
             }

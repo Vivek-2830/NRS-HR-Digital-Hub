@@ -229,7 +229,7 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
 
       <div className="hr-container">
         <div className="cards-container">
-          <a href="#" className="hr-card">
+          <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx" className="hr-card">
             <div className="icon-box">
               <img src={require('../assets/Faqicon1.png')} />
             </div>
@@ -242,7 +242,7 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
             </div>
           </a>
 
-          <a href="#" className="hr-card">
+          <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
             <div className="icon-box">
               <img src={require('../assets/Faqicon2.png')} />
             </div>

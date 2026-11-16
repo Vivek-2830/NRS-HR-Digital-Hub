@@ -45,9 +45,9 @@ export default class FormsAndResourcesWebPart extends BaseClientSideWebPart<IFor
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
         siteUrl: this.context.pageContext.web.absoluteUrl.replace(/\/$/, ''),
-        listTitle: this.properties.listTitle || 'Forms and Resources',
+        listTitle: this.properties.listTitle || 'HR Policies',
         hrDomainField: this.properties.hrDomainField || 'HRDomain',
-        typeField: this.properties.typeField || 'PoliceType',
+        typeField: this.properties.typeField || 'PolicyType',
         nameField: this.properties.nameField || 'Title'
       }
     );
