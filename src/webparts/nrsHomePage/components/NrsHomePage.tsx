@@ -52,23 +52,15 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
             <div className="hr-hero-copy">
               <p className="hr-eyebrow">
-                HUMAN CAPITAL MANAGEMENT GROUP
+                {this.props.HRPolicieTitle || 'HUMAN CAPITAL MANAGEMENT GROUP'}
               </p>
 
               <h1 className="hr-title">
-                Your home for every
-                <br />
-                HR policy, procedure
-                <br />
-                and form
+                {this.props.HRPolicieDescription || 'Your home for every HR policy, procedure and form'}
               </h1>
 
               <p className="hr-description">
-                Find what you need quickly. Search the Hub,
-                <br />
-                browse by HR domain, or open the full
-                <br />
-                A to Z of policies.
+                {this.props.HRPolicieSource || 'Find what you need quickly. Search the Hub, browse by HR domain, or open the full A to Z of policies.'}
               </p>
             </div>
 
@@ -103,12 +95,12 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
             <div className="hr-button-group">
 
-              <a href="#" className="hr-btn hr-btn-primary">
+              <a href="ExploreHub" className="hr-btn hr-btn-primary">
                 Browse the HR domains
                 <span className="hr-arrow">&#8250;</span>
               </a>
 
-              <a href="#" className="hr-btn hr-btn-outline">
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/HR-Policies-and-Procedures-A-to-Z.aspx" className="hr-btn hr-btn-outline">
                 Open the A to Z
               </a>
 
@@ -117,7 +109,8 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
           </section>
 
           {/* ------ Explore The Hub Link Section --------------- */}
-          <section className="hr-explore-section">
+          <div id="ExploreHub">
+            <section className="hr-explore-section">
 
             <h2>Explore the Hub</h2>
 
@@ -273,8 +266,9 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
             </div>
 
-          </section>
-
+            </section>
+          </div>
+        
         </div>
 
         <div className="policy-container">

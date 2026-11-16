@@ -15,6 +15,9 @@ import { sp } from '@pnp/sp/presets/all';
 
 export interface INrsHomePageWebPartProps {
   description: string;
+  HRPolicieTitle: string;
+  HRPolicieSource: string;
+  HRPolicieDescription: string;
 }
 
 export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePageWebPartProps> {
@@ -41,7 +44,10 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context
+        context: this.context,
+        HRPolicieTitle: this.properties.HRPolicieTitle,
+        HRPolicieSource: this.properties.HRPolicieSource,
+        HRPolicieDescription: this.properties.HRPolicieDescription
       }
     );
 
@@ -90,8 +96,14 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('HRPolicieTitle', {
+                  label: 'HR Policies Title'
+                }),
+                PropertyPaneTextField('HRPolicieSource', {
+                  label: 'HR Policies Source'
+                }),
+                PropertyPaneTextField('HRPolicieDescription', {
+                  label: 'HR Policies Description'
                 })
               ]
             }

@@ -5,4 +5,7 @@ export interface INrsHomePageProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: any;
+  HRPolicieTitle: string;
+  HRPolicieSource: string;
+  HRPolicieDescription: string;
 }
