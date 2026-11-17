@@ -23,10 +23,11 @@ export default class NrsFooter extends React.Component<INrsFooterProps, {}> {
 
             <div className="brand-section">
               <div className="logo">
-                <span className="logo-text">NRS</span>
+                {/* <span className="logo-text">NRS</span>
                 <span className="logo-subtext">
                   NIGERIA<br />REVENUE<br />SERVICE
-                </span>
+                </span> */}
+                <img src={(require('../assets/images.jpg'))} />
               </div>
 
               <div className="tagline">
@@ -35,7 +36,7 @@ export default class NrsFooter extends React.Component<INrsFooterProps, {}> {
             </div>
 
             <nav className="header-navigation">
-              <a href="#">FAQs</a>
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">FAQs</a>
               <a href="#">HR Contact</a>
               <a href="#">Help &amp; Support</a>
               <a href="#">Accessibility</a>
