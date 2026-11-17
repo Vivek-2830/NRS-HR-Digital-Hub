@@ -52,9 +52,14 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
 
   const title = policy.Title || stripExt(policy.FileLeafRef);
   const domain = policy.HRDomain ? policy.HRDomain.Title : '';
-  const resources = siblings.filter(d => d.PolicyType !== 'Policies');
+  const resources = siblings.filter(d => d.PolicyType !== 'Policies' && d.PolicyType !== 'Procedures');
   const relatedPolicies = siblings.filter(d => d.PolicyType === 'Policies');
-  const ext = (policy.FileLeafRef.split('.').pop() || '').toUpperCase();
+  // const ext = (policy.FileLeafRef.split('.').pop() || '').toUpperCase();
+
+  const extOf = (n: string): string => (n.split('.').pop() || '').toUpperCase();
+
+  const procedures = siblings.filter(d => d.PolicyType === 'Procedures');
+  const ext = extOf(policy.FileLeafRef);
 
   return (
     <div id="nrsHrDomainssubpage">
@@ -78,15 +83,28 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
         <div className="rule"></div>
 
         {policy.PolicyOverview && (
-          <div className="lead" 
+          <div className="lead"
           // dangerouslySetInnerHTML={{ __html: policy.Overview }} 
           >
             {policy.PolicyOverview}
-            </div>
+          </div>
         )}
 
         <div className="layout">
           <div className="main">
+            {/* <section>
+              <h3 className="section-title">Download</h3>
+              <div className="downloads">
+                <a href={downloadUrl(siteUrl, policy.FileRef)} className="dl primary">
+                  <span className="icon"><DlIcon /></span>
+                  <span>
+                    <span className="name" style={{ display: 'block' }}>Policy</span>
+                    <span className="type">{ext}</span>
+                  </span>
+                </a>
+              </div>
+            </section> */}
+
             <section>
               <h3 className="section-title">Download</h3>
               <div className="downloads">
@@ -97,6 +115,16 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
                     <span className="type">{ext}</span>
                   </span>
                 </a>
+
+                {procedures.map(p => (
+                  <a key={p.Id} href={downloadUrl(siteUrl, p.FileRef)} className="dl">
+                    <span className="icon"><DlIcon /></span>
+                    <span>
+                      <span className="name" style={{ display: 'block' }}>Procedure</span>
+                      <span className="type">{extOf(p.FileLeafRef)}</span>
+                    </span>
+                  </a>
+                ))}
               </div>
             </section>
 
@@ -133,7 +161,7 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
 
             <section>
               <h3 className="section-title">Need help</h3>
-              <div className="help">
+              {/* <div className="help">
                 <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">
                   <span className="name" style={{ display: 'block' }}>FAQs and Knowledge Base</span>
                   <span className="desc" style={{ display: 'block' }}>Quick answers on this policy.</span>
@@ -142,7 +170,45 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
                   <span className="name" style={{ display: 'block' }}>Ask HR</span>
                   <span className="desc" style={{ display: 'block' }}>Raise a query through the People Service Portal.</span>
                 </a>
-              </div>
+              </div> */}
+              <div className="hr-container" style={{marginTop:'0'}}>
+
+              <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
+                <div className="hr-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path>
+                    <circle cx="12" cy="16.5" r=".5" fill="currentColor"></circle>
+                  </svg>
+                </div>
+
+                <div className="hr-content">
+                  <h3>FAQs and Knowledge Base</h3>
+                  <p>Quick answers for this area of HR.</p>
+                  <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">
+                    Go to FAQs <span>›</span>
+                  </a>
+                </div>
+              </a>
+
+              <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
+                <div className="hr-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 4.5h14v12H9l-4 3v-15z"></path>
+                    <path d="M9 9h6M9 12h4"></path>
+                  </svg>
+                </div>
+
+                <div className="hr-content">
+                  <h3>Ask HR</h3>
+                  <p>Raise a query through the People Service Portal.</p>
+                  <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">
+                    Ask HR <span>›</span>
+                  </a>
+                </div>
+              </a>
+
+            </div>
             </section>
           </div>
 
