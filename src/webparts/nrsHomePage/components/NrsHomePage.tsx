@@ -95,7 +95,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
             <div className="hr-button-group">
 
-              <a href="ExploreHub" className="hr-btn hr-btn-primary">
+              <a href="#" className="hr-btn hr-btn-primary">
                 Browse the HR domains
                 <span className="hr-arrow">&#8250;</span>
               </a>
@@ -802,133 +802,137 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
           </div>
 
           {/* ----------------- News and Announcement Section ----------------- */}
-          <section className="news-section">
+          <div id="NewsAnnoun">
+            <section className="news-section">
 
-            <div className="section-header">
-              <h2>Latest news and announcements</h2>
-              <a href="#" className="see-all">See all <span>›</span></a>
-            </div>
-
-            <div className="news-grid">
-
-              {
-                this.state.NewsAnnouncementsData.length > 0 &&
-                  this.state.NewsAnnouncementsData.map((item) => {
-                    return (
-                      <div className="news-card">
-
-                        <div className="news-image">
-                          <img
-                            src={item.NewsImage}
-                            alt="NRS team"
-                          />
-                        </div>
-
-                        <div className="news-content">
-                          <h3>{item.NewsTitle}</h3>
-
-                          <p className="news-meta">
-                            {item.NewsSource} · {moment(new Date(item.NewsDate)).format("MMMM DD, YYYY")}
-                          </p>
-
-                          <p className="news-description">
-                            {item.NewsDescription}
-                          </p>
-                        </div>
-
-                      </div>
-                    );
-                  })
-              }
-
-              {/* <div className="news-card">
-
-                <div className="news-image">
-                  <img
-                    src={(require('../assets/download.jpg'))}
-                    alt="NRS team"
-                  />
-                </div>
-
-                <div className="news-content">
-                  <h3>Disciplinary Policy and Procedure now published</h3>
-
-                  <p className="news-meta">
-                    Human Capital Management Group · 3 June 2026
-                  </p>
-
-                  <p className="news-description">
-                    The revised Disciplinary Policy and Procedure is now
-                    live on the Hub, with clearer investigation, hearing
-                    and appeal standards.
-                  </p>
-                </div>
-
+              <div className="section-header">
+                <h2>Latest news and announcements</h2>
+                <a href="#" className="see-all">See all <span>›</span></a>
               </div>
 
-              <div className="news-card">
+              <div className="news-grid">
 
-                <div className="leave-image">
-                  <div className="leave-circle"></div>
+                {
+                  this.state.NewsAnnouncementsData.length > 0 &&
+                    this.state.NewsAnnouncementsData.map((item) => {
+                      return (
+                        <a href={item.NewsLink.Url} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                          <div className="news-card">
 
-                  <div className="calendar-icon">
-                    <div className="calendar-top"></div>
-                    <div className="calendar-rings">
+                            <div className="news-image">
+                              <img
+                                src={item.NewsImage}
+                                alt="NRS team"
+                              />
+                            </div>
+
+                            <div className="news-content">
+                              <h3>{item.NewsTitle}</h3>
+
+                              <p className="news-meta">
+                                {item.NewsSource} · {moment(new Date(item.NewsDate)).format("MMMM DD, YYYY")}
+                              </p>
+
+                              <p className="news-description">
+                                {item.NewsDescription}
+                              </p>
+                            </div>
+
+                          </div>
+                        </a>
+                      );
+                    })
+                }
+
+                {/* <div className="news-card">
+
+                  <div className="news-image">
+                    <img
+                      src={(require('../assets/download.jpg'))}
+                      alt="NRS team"
+                    />
+                  </div>
+
+                  <div className="news-content">
+                    <h3>Disciplinary Policy and Procedure now published</h3>
+
+                    <p className="news-meta">
+                      Human Capital Management Group · 3 June 2026
+                    </p>
+
+                    <p className="news-description">
+                      The revised Disciplinary Policy and Procedure is now
+                      live on the Hub, with clearer investigation, hearing
+                      and appeal standards.
+                    </p>
+                  </div>
+
+                </div>
+
+                <div className="news-card">
+
+                  <div className="leave-image">
+                    <div className="leave-circle"></div>
+
+                    <div className="calendar-icon">
+                      <div className="calendar-top"></div>
+                      <div className="calendar-rings">
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <div className="calendar-check">✓</div>
+                    </div>
+                  </div>
+
+                  <div className="news-content">
+                    <h3>Annual leave: plan your 2027 entitlement</h3>
+
+                    <p className="news-meta">
+                      People Services · 28 May 2026
+                    </p>
+
+                    <p className="news-description">
+                      Requests are submitted through the HR system and
+                      approved by your line manager. See the Annual Leave
+                      policy for carry over rules.
+                    </p>
+                  </div>
+
+                </div>
+
+                <div className="news-card">
+
+                  <div className="az-image">
+                    <div className="az-title">A–Z</div>
+
+                    <div className="az-lines">
+                      <span></span>
                       <span></span>
                       <span></span>
                     </div>
-                    <div className="calendar-check">✓</div>
+
+                    <div className="az-dots"></div>
                   </div>
-                </div>
 
-                <div className="news-content">
-                  <h3>Annual leave: plan your 2027 entitlement</h3>
+                  <div className="news-content">
+                    <h3>New A to Z index makes every policy easier to find</h3>
 
-                  <p className="news-meta">
-                    People Services · 28 May 2026
-                  </p>
+                    <p className="news-meta">
+                      Human Capital Management Group · 20 May 2026
+                    </p>
 
-                  <p className="news-description">
-                    Requests are submitted through the HR system and
-                    approved by your line manager. See the Annual Leave
-                    policy for carry over rules.
-                  </p>
-                </div>
+                    <p className="news-description">
+                      Every NRS HR policy is now listed in one alphabetical
+                      index, with a link straight to each policy page.
+                    </p>
+                  </div>
+
+                </div> */}
 
               </div>
 
-              <div className="news-card">
-
-                <div className="az-image">
-                  <div className="az-title">A–Z</div>
-
-                  <div className="az-lines">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-
-                  <div className="az-dots"></div>
-                </div>
-
-                <div className="news-content">
-                  <h3>New A to Z index makes every policy easier to find</h3>
-
-                  <p className="news-meta">
-                    Human Capital Management Group · 20 May 2026
-                  </p>
-
-                  <p className="news-description">
-                    Every NRS HR policy is now listed in one alphabetical
-                    index, with a link straight to each policy page.
-                  </p>
-                </div>
-
-              </div> */}
-
-            </div>
-
-          </section>
+            </section>
+          </div>
 
           <div className="quick-links">
 
@@ -1089,7 +1093,8 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
       "NewsSource",
       "NewsDate",
       "NewsDescription",
-      "NewsImage"
+      "NewsImage",
+      "NewsLink"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
       if (data.length > 0) {
@@ -1100,7 +1105,8 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
             NewsSource: item.NewsSource ? item.NewsSource : "",
             NewsDescription: item.NewsDescription ? item.NewsDescription : "",
             NewsImage: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.NewsImage ? JSON.parse(item.NewsImage).serverRelativeUrl : require(`../assets/HRDomin.png`),
-            NewsDate: item.NewsDate ? item.NewsDate : ""
+            NewsDate: item.NewsDate ? item.NewsDate : "",
+            NewsLink: item.NewsLink ? item.NewsLink : ""
           });
         });
         this.setState({ NewsAnnouncementsData: AllData });
