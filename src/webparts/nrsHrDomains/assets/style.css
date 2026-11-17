@@ -275,6 +275,7 @@
     line-height: 1.4;
     margin-bottom: 5px;
     color: #242424;
+        word-wrap: break-word;
 }
 
 .policy-description {
