@@ -461,7 +461,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
         </div>
 
         
-        <div className="hr-domain-container">
+        <div className="hr-domain-container" id='HRdomain'>
 
           {/* ------------- Browse Hr domain ------------------------  */}
           <section className="hr-domain-section">
@@ -932,7 +932,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
           <div className="quick-links">
 
-            <div className="quick-card">
+            <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx"  className="quick-card">
 
               <div className="quick-icon">
                 <span className="question-icon">?</span>
@@ -948,9 +948,9 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
                 </a>
               </div>
 
-            </div>
+            </a>
 
-            <div className="quick-card">
+            <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="quick-card">
 
               <div className="quick-icon">
                 <span className="message-icon"><img src={require('../assets/Ask.png')} /></span>
@@ -966,7 +966,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
                 </a>
               </div>
 
-            </div>
+            </a>
 
           </div>
 

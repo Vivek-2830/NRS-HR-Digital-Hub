@@ -281,7 +281,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
 
             <div className="hr-container">
 
-              <div className="hr-card">
+              <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
                 <div className="hr-icon">
                   <svg viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="9"></circle>
@@ -297,9 +297,9 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
                     Go to FAQs <span>›</span>
                   </a>
                 </div>
-              </div>
+              </a>
 
-              <div className="hr-card">
+              <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
                 <div className="hr-icon">
                   <svg viewBox="0 0 24 24">
                     <path d="M5 4.5h14v12H9l-4 3v-15z"></path>
@@ -314,7 +314,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
                     Ask HR <span>›</span>
                   </a>
                 </div>
-              </div>
+              </a>
 
             </div>
 
