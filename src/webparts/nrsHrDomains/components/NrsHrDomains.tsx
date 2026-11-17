@@ -258,7 +258,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
         </section>
 
         <section className="bottom-grid">
-          <div className="bottom-card">
+          <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-card">
             <div className="icon-box"> <svg className="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="12" cy="12" r="9"></circle>
               <path d="M9.6 9a2.5 2.5 0 0 1 4.8 1c0 1.7-2.4 2-2.4 3.5"></path>
@@ -269,15 +269,15 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
               <p>Quick answers for this area of HR.</p>
               <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx" className="bottom-link">Go to FAQs <i className="fa-solid fa-caret-right"></i></a>
             </div>
-          </div>
-          <div className="bottom-card">
+          </a>
+          <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-card">
             <div className="icon-box"><svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5h14v12H8l-3 3z"></path><path d="M9 9h6M9 12h4"></path></svg></div>
             <div className="bottom-content">
               <h3>Ask HR</h3>
               <p>Raise a query through the People Service Portal.</p>
               <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-link">Ask HR <i className="fa-solid fa-caret-right"></i></a>
             </div>
-          </div>
+          </a>
         </section>
       </main>
     </div>
