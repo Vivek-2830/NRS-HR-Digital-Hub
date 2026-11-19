@@ -4,6 +4,7 @@ export interface IDomain {
   Id: number;
   Title: string;
   Overview?: string;
+  DomainLink?: { Url: string; Description?: string };  // add this
 }
 
 export interface IPolicyDoc {
@@ -40,7 +41,7 @@ export class HrService {
   public getDomains(): Promise<IDomain[]> {
     return this.get<IDomain[]>(
       `${this.siteUrl}/_api/web/lists/getbytitle('${this.hubList}')/items` +
-      `?$select=Id,Title,Overview&$orderby=Title&$top=500`
+      `?$select=Id,Title,Overview,DomainLink&$orderby=Title&$top=500`
     );
   }
 

@@ -29,7 +29,7 @@ const ALL_TYPES = '__all_types__';
 
 // Only these types are shown on the page and in the Type dropdown.
 // Spelling must match the choice values in SharePoint (case is ignored).
-const ALLOWED_TYPES: string[] = ['Forms', 'Checklist', 'Template', 'Guide'];
+const ALLOWED_TYPES: string[] = ['Resources', 'Checklist', 'Template', 'Guide'];
 
 export default class FormsAndResources extends React.Component<IFormsAndResourcesProps,IFormsAndResourcesState> {
 
@@ -204,11 +204,11 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
             <div className="breadcrumb">
               <a href={this.props.siteUrl}>Home</a>
               <span>/</span>
-              <span>Forms and Resources</span>
+              <span>Resources</span>
             </div>
 
             <div className="page-header">
-              <h1>Forms and Resources</h1>
+              <h1>Resources</h1>
               <p>
                 One place for every HR form, template and checklist.
                 Filter by HR domain or type, search the list, and download what you need.
