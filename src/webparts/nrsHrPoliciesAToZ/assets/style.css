@@ -353,6 +353,7 @@
 .policy-table tbody tr.alphabet-row {
     height: 36px;
     background-color: #faf9f8;
+    display: none;
 }
 
 .policy-table tbody tr.alphabet-row td {

@@ -12,7 +12,7 @@ interface IResourceItem {
   url: string;         // open in browser
   downloadUrl: string; // force download
   domains: string[];   // HR Domain (lookup)
-  types: string[];     // Type (choice)
+  types: string[];     // Type (choice) - only allowed types are kept
 }
 
 interface IFormsAndResourcesState {
@@ -26,6 +26,10 @@ interface IFormsAndResourcesState {
 
 const ALL_DOMAINS = '__all_domains__';
 const ALL_TYPES = '__all_types__';
+
+// Only these types are shown on the page and in the Type dropdown.
+// Spelling must match the choice values in SharePoint (case is ignored).
+const ALLOWED_TYPES: string[] = ['Forms', 'Checklist', 'Template', 'Guide'];
 
 export default class FormsAndResources extends React.Component<IFormsAndResourcesProps,IFormsAndResourcesState> {
 
@@ -83,6 +87,20 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
     return out.sort((a, b) => a.localeCompare(b));
   }
 
+  // Returns only the allowed types, mapped to their canonical spelling
+  private getAllowedTypes(types: string[]): string[] {
+    const out: string[] = [];
+    for (let i = 0; i < types.length; i++) {
+      const t = types[i].trim().toLowerCase();
+      for (let j = 0; j < ALLOWED_TYPES.length; j++) {
+        if (ALLOWED_TYPES[j].toLowerCase() === t && out.indexOf(ALLOWED_TYPES[j]) === -1) {
+          out.push(ALLOWED_TYPES[j]);
+        }
+      }
+    }
+    return out;
+  }
+
   // ---------- data ----------
 
   private async loadItems(): Promise<void> {
@@ -106,7 +124,11 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
 
       for (let i = 0; i < rows.length; i++) {
         const r = rows[i];
-        if (r.FSObjType === 1) { continue; } // skip folders, keep every file type
+        if (r.FSObjType === 1) { continue; } // skip folders
+
+        // keep only files that have at least one allowed type
+        const allowedTypes = this.getAllowedTypes(this.toArray(r[typeField]));
+        if (allowedTypes.length === 0) { continue; }
 
         const fileName: string = r.FileLeafRef || '';
         const ext = this.getExt(fileName);
@@ -121,7 +143,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
           url: r.FileRef,
           downloadUrl: siteUrl + '/_layouts/15/download.aspx?SourceUrl=' + encodeURIComponent(r.FileRef),
           domains: this.toArray(r[hrDomainField], 'Title'),
-          types: this.toArray(r[typeField])
+          types: allowedTypes
         });
       }
 
@@ -158,13 +180,10 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
     const { items, loading, error, domainFilter, typeFilter, search } = this.state;
 
     const domainOptions: string[] = [];
-    const typeOptions: string[] = [];
     items.forEach((i) => {
       i.domains.forEach((d) => domainOptions.push(d));
-      i.types.forEach((t) => typeOptions.push(t));
     });
     const domains = this.unique(domainOptions);
-    const types = this.unique(typeOptions);
     const filtered = this.getFilteredItems();
 
     return (
@@ -179,7 +198,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
           </div>
         </section>
 
-        
+
         <div className="container">
           <section className="formsAndResources">
             <div className="breadcrumb">
@@ -216,7 +235,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
                     onChange={(e) => this.setState({ typeFilter: e.target.value })}
                   >
                     <option value={ALL_TYPES}>All types</option>
-                    {types.map((t) => <option key={t} value={t}>{t}</option>)}
+                    {ALLOWED_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </div>
 
@@ -320,7 +339,7 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
 
           </section>
         </div>
-        
+
       </div>
 
     );

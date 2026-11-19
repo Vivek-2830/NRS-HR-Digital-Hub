@@ -146,7 +146,7 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
               </section>
             )}
 
-            {relatedPolicies.length > 0 && (
+            {/* {relatedPolicies.length > 0 && (
               <section>
                 <h3 className="section-title">Related policies</h3>
                 <div className="related">
@@ -157,7 +157,7 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
                   ))}
                 </div>
               </section>
-            )}
+            )} */}
 
             <section>
               <h3 className="section-title">Need help</h3>

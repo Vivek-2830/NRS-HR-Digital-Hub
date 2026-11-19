@@ -18,6 +18,7 @@ const POLICY_LIBRARY = 'HR Policies';
 const DOMAIN_LIST = 'HR Domain Hub';
 const DOMAIN_FIELD = 'HRDomain';     // lookup internal name
 const TYPE_FIELD = 'PolicyType';     // choice internal name
+const DEFAULT_POLICY_TYPE = 'Policies'; // exact choice value in the PolicyType column
 
 export class PolicyService {
   constructor(private context: WebPartContext) {}
@@ -51,13 +52,20 @@ export class PolicyService {
     return items.map(i => ({ id: i.Id, title: i.Title }));
   }
 
-  public async getPolicies(): Promise<IPolicy[]> {
+  /**
+   * Returns only files whose PolicyType equals `type` (default: "Policies").
+   */
+  public async getPolicies(type: string = DEFAULT_POLICY_TYPE): Promise<IPolicy[]> {
     const base = this.context.pageContext.web.absoluteUrl;
+    const safeType = type.replace(/'/g, "''"); // escape apostrophes for OData
+
     const url =
       `${base}/_api/web/lists/getbytitle('${POLICY_LIBRARY}')/items` +
       `?$select=Id,Title,FileLeafRef,FileRef,FSObjType,${TYPE_FIELD},` +
       `${DOMAIN_FIELD}/Id,${DOMAIN_FIELD}/Title` +
-      `&$expand=${DOMAIN_FIELD}&$filter=FSObjType eq 0&$top=500`;
+      `&$expand=${DOMAIN_FIELD}` +
+      `&$filter=FSObjType eq 0 and ${TYPE_FIELD} eq '${safeType}'` +
+      `&$top=500`;
 
     const items = await this.getAll(url);
 

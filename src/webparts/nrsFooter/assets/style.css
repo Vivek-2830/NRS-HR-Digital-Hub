@@ -160,3 +160,9 @@
         line-height: 1.6;
     }
 }
+
+
+.logo img {
+    height: 100%;
+    width: 100%;
+}
