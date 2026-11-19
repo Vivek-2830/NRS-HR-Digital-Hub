@@ -488,7 +488,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
                           </div>
                           <div className="hr-domian-content">
                             <h3>{item.Title}</h3>
-                            <p>{item.PoliciesNumber} Policies</p>
+                            <p>{item.PoliciesNumber}</p>
                           </div>
                         </div>
                       </a>
