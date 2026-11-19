@@ -37,9 +37,9 @@ export default class NrsFooter extends React.Component<INrsFooterProps, {}> {
 
             <nav className="header-navigation">
               <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">FAQs</a>
-              <a href="#">HR Contact</a>
-              <a href="#">Help &amp; Support</a>
-              <a href="#">Accessibility</a>
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">HR Contact</a>
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">Help &amp; Support</a>
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">Accessibility</a>
             </nav>
 
           </div>

@@ -32,7 +32,7 @@ export default class FormsAndResourcesWebPart extends BaseClientSideWebPart<IFor
 
     return super.onInit().then(() => {
       sp.setup({ spfxContext: this.context as any });
-    })
+    });
   }
 
   public render(): void {

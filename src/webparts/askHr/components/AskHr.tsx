@@ -20,7 +20,7 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
     this.state = {
       ReachOutDetails: "",
       WhatToExpectDetails: ""
-    }
+    };
 
   }
 
@@ -95,7 +95,7 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
                         <p>{item.Description}</p>
                         <a href="#">{item.ContactType}</a>
                       </div>
-                    )
+                    );
                   })
                 }
 
@@ -130,7 +130,7 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
                           </td>
                         </tr>
                       </tbody>
-                    )
+                    );
                   })
                 }
               </table>

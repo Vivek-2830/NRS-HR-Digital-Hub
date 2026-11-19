@@ -20,7 +20,7 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
     this.state = {
       FAQsDetailsData: "",
       DefinitionsData: ""
-    }
+    };
   }
 
   private getGroupedFAQs() {

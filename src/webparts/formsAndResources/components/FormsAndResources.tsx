@@ -323,6 +323,6 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
         
       </div>
 
-    )
+    );
   }
 }
