@@ -9,6 +9,7 @@ require('../assets/style.css');
 export interface IFaQsAndKnowledgeState {
   FAQsDetailsData: any;
   DefinitionsData: any;
+  KnowledgearticleData: any;
 }
 
 export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeProps, IFaQsAndKnowledgeState> {
@@ -19,7 +20,8 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
 
     this.state = {
       FAQsDetailsData: "",
-      DefinitionsData: ""
+      DefinitionsData: "",
+      KnowledgearticleData: ""
     };
   }
 
@@ -183,6 +185,27 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
 
             <div className="knowledge-card">
 
+              {
+                this.state.KnowledgearticleData.length > 0 &&
+                  this.state.KnowledgearticleData.map((item : any) => {
+                    return (
+                      <a href={item.ArticleLink.Url} target="_blank" rel="noopener noreferrer" data-interception="off" style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}>
+                        <div className="knowledge-item">
+                          <svg className="article-icon" viewBox="0 0 24 24">
+                            <path d="M6 2.5h8l4 4v15H6z"></path>
+                            <path d="M14 2.5v4h4M9 11h6M9 15h6"></path>
+                          </svg>
+
+                          <div className="article-content">
+                            <h3>{item.ArticleName}</h3>
+                            <p>{item.ArticleDescription}</p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })
+              }
+
               <div className="knowledge-item">
                 <svg className="article-icon" viewBox="0 0 24 24">
                   <path d="M6 2.5h8l4 4v15H6z"></path>
@@ -232,7 +255,7 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
                 <p>{this.props.HelpDescription || 'If your question is not answered here, raise a request through the People Service Portal.'}</p>
               </div>
 
-              <a href={this.props.HRPortalLink || '#'} className="ask-hr-btn">Ask HR</a>
+              <a href={this.props.HRPortalLink || 'https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx'} target="_blank" rel="noopener noreferrer" data-interception="off" className="ask-hr-btn">Ask HR</a>
 
             </div>
 
@@ -247,6 +270,7 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
   public async componentDidMount() {
     this.getFAQsRepository();
     this.getDefinitionsData();
+    this.getKnowledgeData();
   }
 
   public async getFAQsRepository() {
@@ -291,6 +315,25 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
     });
 
     console.log("Definitions Data:", AllData);
+  }
+
+  public async getKnowledgeData() {
+    const knowledge = await sp.web.lists.getByTitle("Knowledge articles").items.select(
+      "ID","ArticleName", "ArticleDescription", "ArticleLink"
+    ).get();
+
+    const AllData = knowledge.map((item: any) => ({
+      ID: item.ID || "",
+      ArticleName: item.ArticleName || "",
+      ArticleDescription: item.ArticleDescription || "",
+      ArticleLink: item.ArticleLink || ""
+    }));
+
+    this.setState({
+      KnowledgearticleData: AllData
+    });
+
+    console.log("Knowledge Data:", AllData);
   }
 
 }
