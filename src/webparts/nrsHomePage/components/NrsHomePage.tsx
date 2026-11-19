@@ -798,7 +798,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
               </div>
             </div>
 
-            <a href="#" className="primary-button">Open the A to Z</a>
+            <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/HR-Policies-and-Procedures-A-to-Z.aspx" className="primary-button">Open the A to Z</a>
           </div>
 
           {/* ----------------- News and Announcement Section ----------------- */}

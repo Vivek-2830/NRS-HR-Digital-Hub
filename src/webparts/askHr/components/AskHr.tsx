@@ -154,7 +154,7 @@ export default class AskHr extends React.Component<IAskHrProps, IAskHrState> {
                 <p>{this.props.FAQsBaseQuestions || "The FAQs and Knowledge Base cover the questions we are asked most across HR."}</p>
               </div>
 
-              <a href={this.props.BrowseFAQsLink || "#"} className="faq-button">
+              <a href={this.props.BrowseFAQsLink || "https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx"} className="faq-button">
                 Browse the FAQs
               </a>
 
