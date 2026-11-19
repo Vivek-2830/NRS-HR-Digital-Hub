@@ -488,7 +488,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
                           </div>
                           <div className="hr-domian-content">
                             <h3>{item.Title}</h3>
-                            <p>{item.PoliciesNumber}</p>
+                            <p>{item.PoliciesNumber} Policies</p>
                           </div>
                         </div>
                       </a>
@@ -1063,28 +1063,45 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
   }
 
   public async getHRDomain() {
-    const hrdomain = await sp.web.lists.getByTitle("HR Domain Hub").items.select(
-      "Title",
-      "PoliciesNumber",
-      "Icon",
-      "DomainLink"
-    ).expand("AttachmentFiles").get().then((data) => {
-      let AllData = [];
-      if (data.length > 0) {
-        data.forEach((item) => {
-          AllData.push({
-            ID: item.ID ? item.ID : "",
-            Title: item.Title ? item.Title : "",
-            PoliciesNumber: item.PoliciesNumber ? item.PoliciesNumber : "",
-            Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/HRDomin.png`),
-            DomainLink: item.DomainLink ? item.DomainLink : ""
-          });
-        });
+    try {
+      const domains = await sp.web.lists.getByTitle("HR Domain Hub").items.select(
+        "Id",
+        "Title",
+        "Icon",
+        "DomainLink"
+      ).expand("AttachmentFiles").get();
+
+      // Fetch only HR Policies items whose Policy Type = "Policies" (getAll avoids the 100-item default limit)
+      // NOTE: "PolicyType" = internal name of the choice column, "Policies" = the choice value. Adjust if different.
+      const policyItems = await sp.web.lists.getByTitle("HR Policies").items
+        .select("Id", "HRDomain/Id", "PolicyType")
+        .expand("HRDomain")
+        .filter("FSObjType eq 0 and PolicyType eq 'Policies'")
+        .getAll();
+
+      // Count policies per HR Domain (lookup id)
+      const policyCountMap: { [domainId: number]: number } = {};
+      policyItems.forEach((policy) => {
+        const domainId = policy.HRDomain ? policy.HRDomain.Id : null;
+        if (domainId) {
+          policyCountMap[domainId] = (policyCountMap[domainId] || 0) + 1;
+        }
+      });
+
+      const AllData = domains.map((item) => ({
+        ID: item.Id ? item.Id : "",
+        Title: item.Title ? item.Title : "",
+        PoliciesNumber: policyCountMap[item.Id] || 0,
+        Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/HRDomin.png`),
+        DomainLink: item.DomainLink ? item.DomainLink : ""
+      }));
+
+      if (AllData.length > 0) {
         this.setState({ HRDomainHub: AllData });
       }
-    }).catch((error) => {
+    } catch (error) {
       console.log("Error fetching HR Domain Hub Info: ", error);
-    });
+    }
   }
 
   public async getNewsAnnouncements() {

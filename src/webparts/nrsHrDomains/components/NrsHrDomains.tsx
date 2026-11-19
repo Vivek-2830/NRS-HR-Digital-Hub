@@ -227,19 +227,28 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
             Related HR processes
           </h2>
           <div className="process-grid">
-            {related.map(r => (
-              <div className="process-card" key={r.Id}>
-                <div className="icon-box">
-                  <img src={require('../assets/related.png')} />
-                </div>
-                <div className="card-content">
-                  <h3>{r.Title}</h3>
-                  <a href="#" className="red-link">
-                    Open domain <i className="fa-solid fa-caret-right"></i>
-                  </a>
-                </div>
-              </div>
-            ))}
+{related.map(r => {
+  const domainUrl = r.DomainLink && r.DomainLink.Url ? r.DomainLink.Url : '';
+  return (
+    <a style={{textDecoration:'none',color:'inherit'}} href={domainUrl} className="process-card" key={r.Id}>
+      <div className="icon-box">
+        <img src={require('../assets/related.png')} />
+      </div>
+      <div className="card-content">
+        <h3>{r.Title}</h3>
+        {domainUrl ? (
+          <a href={domainUrl} className="red-link" data-interception="off">
+            Open domain <i className="fa-solid fa-caret-right"></i>
+          </a>
+        ) : (
+          <span className="red-link" style={{ opacity: 0.5 }}>
+            Open domain <i className="fa-solid fa-caret-right"></i>
+          </span>
+        )}
+      </div>
+    </a>
+  );
+})}
           </div>
         </section>
 
@@ -258,7 +267,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
         </section>
 
         <section className="bottom-grid">
-          <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-card">
+          <a style={{textDecoration:'none',color:'inherit'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx" className="bottom-card">
             <div className="icon-box"> <svg className="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="12" cy="12" r="9"></circle>
               <path d="M9.6 9a2.5 2.5 0 0 1 4.8 1c0 1.7-2.4 2-2.4 3.5"></path>
@@ -270,7 +279,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
               <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx" className="bottom-link">Go to FAQs <i className="fa-solid fa-caret-right"></i></a>
             </div>
           </a>
-          <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-card">
+          <a style={{textDecoration:'none',color:'inherit'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="bottom-card">
             <div className="icon-box"><svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5h14v12H8l-3 3z"></path><path d="M9 9h6M9 12h4"></path></svg></div>
             <div className="bottom-content">
               <h3>Ask HR</h3>
