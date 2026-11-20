@@ -807,7 +807,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
               <div className="section-header">
                 <h2>Latest news and announcements</h2>
-                <a href="#" className="see-all">See all <span>›</span></a>
+                <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/NewsandAnnouncements.aspx" target="_blank" rel="noopener noreferrer" data-interception="off" className="see-all">See all <span>›</span></a>
               </div>
 
               <div className="news-grid">
@@ -1168,6 +1168,6 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
       HRPolicieDoc: AllData
     });
   }
-}
+  }
 
 }
