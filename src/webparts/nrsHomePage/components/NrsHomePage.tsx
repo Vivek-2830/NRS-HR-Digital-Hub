@@ -95,7 +95,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
 
             <div className="hr-button-group">
 
-              <a href="#" className="hr-btn hr-btn-primary">
+              <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub#HRdomain" className="hr-btn hr-btn-primary">
                 Browse the HR domains
                 <span className="hr-arrow">&#8250;</span>
               </a>

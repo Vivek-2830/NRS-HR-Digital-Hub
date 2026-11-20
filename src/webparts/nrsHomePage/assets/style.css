@@ -734,9 +734,10 @@
     gap: 8px;
     flex-shrink: 0;
     color: #e00000;
-    text-decoration: none;
+    text-decoration: none; 
     font-size: 12px;
     font-weight: 400;
+    display: none;
 }
 
 .hr-view-all span {
