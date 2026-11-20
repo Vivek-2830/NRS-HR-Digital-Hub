@@ -31,7 +31,7 @@ export default class NrsFooter extends React.Component<INrsFooterProps, {}> {
               </div>
 
               <div className="tagline">
-                Together We Rise. Together We Prosper.
+                Inspiring Trust, Sustaining Growth
               </div>
             </div>
 
