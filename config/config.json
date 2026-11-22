@@ -65,6 +65,14 @@
           "manifest": "./src/webparts/nrsHrDomainSubpage/NrsHrDomainSubpageWebPart.manifest.json"
         }
       ]
+    },
+    "nrs-all-news-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/nrsAllNews/NrsAllNewsWebPart.js",
+          "manifest": "./src/webparts/nrsAllNews/NrsAllNewsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -76,6 +84,7 @@
     "FormsAndResourcesWebPartStrings": "lib/webparts/formsAndResources/loc/{locale}.js",
     "FaQsAndKnowledgeWebPartStrings": "lib/webparts/faQsAndKnowledge/loc/{locale}.js",
     "AskHrWebPartStrings": "lib/webparts/askHr/loc/{locale}.js",
-    "NrsHrDomainSubpageWebPartStrings": "lib/webparts/nrsHrDomainSubpage/loc/{locale}.js"
+    "NrsHrDomainSubpageWebPartStrings": "lib/webparts/nrsHrDomainSubpage/loc/{locale}.js",
+    "NrsAllNewsWebPartStrings": "lib/webparts/nrsAllNews/loc/{locale}.js"
   }
 }
