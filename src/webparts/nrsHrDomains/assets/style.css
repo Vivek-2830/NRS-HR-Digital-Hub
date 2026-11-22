@@ -76,7 +76,7 @@
 }
 
 /* Main heading */
-.hr-title {
+.hr-domain-title {
     margin: 0 0 18px;
     color: #ffffff;
     /* font-size: clamp(34px, 4.1vw, 64px); */
@@ -225,7 +225,7 @@
 }
 
 /* Policy card */
-.policy-card {
+.homepolicy-card {
     display: flex;
     align-items: flex-start;
     gap: 13px;
@@ -237,9 +237,10 @@
     text-decoration: none;
     color: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
+    align-items: center;
 }
 
-.policy-card:hover {
+.homepolicy-card:hover {
     border-color: #e60000;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
@@ -332,7 +333,7 @@
         padding: 17px;
     }
 
-    .policy-card {
+    .homepolicy-card {
         min-height: 90px;
     }
 }
