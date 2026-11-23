@@ -12,12 +12,22 @@ import * as strings from 'NrsHomePageWebPartStrings';
 import NrsHomePage from './components/NrsHomePage';
 import { INrsHomePageProps } from './components/INrsHomePageProps';
 import { sp } from '@pnp/sp/presets/all';
+import {
+  PropertyFieldFilePicker, IFilePickerResult
+} from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
+
+import {
+  SPHttpClient,
+  SPHttpClientResponse
+} from "@microsoft/sp-http";
 
 export interface INrsHomePageWebPartProps {
   description: string;
   HRPolicieTitle: string;
   HRPolicieSource: string;
   HRPolicieDescription: string;
+  filePickerResult: IFilePickerResult;
+  bannerImageUrl: string;
 }
 
 export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePageWebPartProps> {
@@ -47,7 +57,9 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
         context: this.context,
         HRPolicieTitle: this.properties.HRPolicieTitle,
         HRPolicieSource: this.properties.HRPolicieSource,
-        HRPolicieDescription: this.properties.HRPolicieDescription
+        HRPolicieDescription: this.properties.HRPolicieDescription,
+        filePickerResult: this.properties.filePickerResult,
+        bannerImageUrl: this.properties.bannerImageUrl
       }
     );
 
@@ -61,6 +73,101 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
 
     return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
   }
+
+  private async _saveBannerImage(
+  result: IFilePickerResult
+): Promise<void> {
+
+  try {
+
+    let imageUrl: string;
+
+    // Case 1: Image already exists in SharePoint
+    if (result.fileAbsoluteUrl) {
+
+      imageUrl = result.fileAbsoluteUrl;
+
+    }
+
+    // Case 2: Image uploaded from local computer
+    else {
+
+      const fileContent: File =
+        await result.downloadFileContent();
+
+      const fileName = fileContent.name;
+
+      const webUrl =
+        this.context.pageContext.web.absoluteUrl;
+
+      const serverRelativeUrl =
+        this.context.pageContext.web.serverRelativeUrl;
+
+      const siteAssetsUrl =
+        (serverRelativeUrl === "/"
+          ? ""
+          : serverRelativeUrl) + "/SiteAssets";
+
+      const safeFileName =
+        encodeURIComponent(fileName.replace(/'/g, "''"));
+
+      const uploadApi =
+        `${webUrl}/_api/web/GetFolderByServerRelativeUrl('${siteAssetsUrl}')/Files/add(url='${safeFileName}',overwrite=true)`;
+
+      const response: SPHttpClientResponse =
+        await this.context.spHttpClient.post(
+          uploadApi,
+          SPHttpClient.configurations.v1,
+          {
+            headers: {
+              "Accept": "application/json;odata=nometadata",
+              "Content-Type": "application/octet-stream"
+            },
+            body: fileContent
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `Image upload failed: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const uploadedFile = await response.json();
+
+      const uploadedServerRelativeUrl =
+        uploadedFile.ServerRelativeUrl ||
+        uploadedFile.d.ServerRelativeUrl;
+
+      const origin = webUrl.split("/").slice(0, 3).join("/");
+
+      imageUrl = origin + uploadedServerRelativeUrl;
+
+    }
+
+    // Save image URL in web part properties
+    const oldValue = this.properties.bannerImageUrl;
+
+    this.properties.bannerImageUrl = imageUrl;
+
+    this.onPropertyPaneFieldChanged(
+      "bannerImageUrl",
+      oldValue,
+      imageUrl
+    );
+
+    console.log("Final Banner Image URL:", imageUrl);
+
+    // Refresh web part
+    this.render();
+
+  } catch (error) {
+
+    console.error("Banner Image Upload Error:", error);
+
+  }
+
+}
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
     if (!currentTheme) {
@@ -104,7 +211,34 @@ export default class NrsHomePageWebPart extends BaseClientSideWebPart<INrsHomePa
                 }),
                 PropertyPaneTextField('HRPolicieDescription', {
                   label: 'HR Policies Description'
-                })
+                }),
+                PropertyFieldFilePicker("filePickerResult", {
+                context: this.context,
+
+                filePickerResult: undefined,
+
+                onPropertyChange:
+                  this.onPropertyPaneFieldChanged.bind(this),
+
+                properties: this.properties,
+
+                onSave: (result: IFilePickerResult) => {
+                  console.log("Selected Image:", result);
+
+                  this._saveBannerImage(result);
+                },
+
+                buttonLabel: "Upload Image",
+                label: "Our Image",
+                key: "BannerImagePicker",
+
+                accepts: [
+                  ".jpg",
+                  ".jpeg",
+                  ".png",
+                  ".gif"
+                ]
+              })
               ]
             }
           ]
