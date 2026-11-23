@@ -111,7 +111,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
         <div className="nrsHomePage">
           <div className="hr-red-shapes"></div>
           <div className="hr-hero-copy">
-            <h1 className="r-domain-title">HR Policies and Procedures</h1>
+            <h1 className="hr-domain-title">HR Policies and Procedures</h1>
           </div>
           <div className="hr-team-photo" role="img" aria-label="Human Capital Management Group team"></div>
         </div>

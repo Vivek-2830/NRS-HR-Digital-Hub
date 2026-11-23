@@ -197,7 +197,7 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
                           </svg>
 
                           <div className="article-content">
-                            <h3>{item.ArticleName}</h3>
+                            <h3>{item.Title}</h3>
                             <p>{item.ArticleDescription}</p>
                           </div>
                         </div>
@@ -206,7 +206,7 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
                   })
               }
 
-              <div className="knowledge-item">
+              {/* <div className="knowledge-item">
                 <svg className="article-icon" viewBox="0 0 24 24">
                   <path d="M6 2.5h8l4 4v15H6z"></path>
                   <path d="M14 2.5v4h4M9 11h6M9 15h6"></path>
@@ -240,7 +240,7 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
                   <h3>Preparing for your performance appraisal</h3>
                   <p>Practical steps to get the most from the appraisal conversation.</p>
                 </div>
-              </div>
+              </div> */}
 
             </div>
 
@@ -319,12 +319,12 @@ export default class FaQsAndKnowledge extends React.Component<IFaQsAndKnowledgeP
 
   public async getKnowledgeData() {
     const knowledge = await sp.web.lists.getByTitle("Knowledge articles").items.select(
-      "ID","ArticleName", "ArticleDescription", "ArticleLink"
+      "ID","Title", "ArticleDescription", "ArticleLink"
     ).get();
 
     const AllData = knowledge.map((item: any) => ({
       ID: item.ID || "",
-      ArticleName: item.ArticleName || "",
+      Title: item.Title || "",
       ArticleDescription: item.ArticleDescription || "",
       ArticleLink: item.ArticleLink || ""
     }));
