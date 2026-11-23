@@ -58,7 +58,7 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
 
   const extOf = (n: string): string => (n.split('.').pop() || '').toUpperCase();
 
-  const procedures = siblings.filter(d => d.PolicyType === 'Procedures');
+  const procedures = siblings.filter(d => d.PolicyType === 'Procedures').slice(0, 1);
   const ext = extOf(policy.FileLeafRef);
 
   return (
