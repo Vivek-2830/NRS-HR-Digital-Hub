@@ -357,16 +357,18 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
                 this.state.PolicyStageInfo.length > 0 &&
                   this.state.PolicyStageInfo.map((item) => {
                     return (
-                      <div className="stage-card">
-                        <span className="stage-number">{item.Stage}</span>
+                      <a href={item.Link.Url} target="_blank" rel="noopener noreferrer" data-interception="off" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                        <div className="stage-card">
+                          <span className="stage-number">{item.Stage}</span>
 
-                        <div className="stage-icon">
-                          <img src={item.StageIcon} alt={item.Title} />
+                          <div className="stage-icon">
+                            <img src={item.StageIcon} alt={item.Title} />
+                          </div>
+
+                          <h3>{item.Title}</h3>
+                          <p>{item.Description}</p>
                         </div>
-
-                        <h3>{item.Title}</h3>
-                        <p>{item.Description}</p>
-                      </div>
+                      </a>
                     );
                 })
               }
@@ -1045,6 +1047,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
       "Title",
       "Description",
       "StageIcon",
+      "Link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
       if (data.length > 0) {
@@ -1054,7 +1057,8 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
             Stage: item.Stage ? item.Stage : "",
             Title: item.Title ? item.Title : "",
             Description: item.Description ? item.Description : "",
-            StageIcon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.StageIcon ? JSON.parse(item.StageIcon).serverRelativeUrl : require(`../assets/HRDomin.png`)
+            StageIcon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.StageIcon ? JSON.parse(item.StageIcon).serverRelativeUrl : require(`../assets/HRDomin.png`),
+            Link: item.Link ? item.Link : ""
           });
         });
         this.setState({ PolicyStageInfo: AllData });
