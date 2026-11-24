@@ -14,11 +14,34 @@ export interface IDomain {
   title: string;
 }
 
+export interface IUserAccess {
+  isOwner: boolean;            // member of the Site Owners group (or site collection admin)
+  allowedDomains: string[];    // domain titles the user's groups map to
+}
+
 const POLICY_LIBRARY = 'HR Policies';
 const DOMAIN_LIST = 'HR Domain Hub';
 const DOMAIN_FIELD = 'HRDomain';     // lookup internal name
 const TYPE_FIELD = 'PolicyType';     // choice internal name
 const DEFAULT_POLICY_TYPE = 'Policies'; // exact choice value in the PolicyType column
+
+// Group naming convention: a group maps to a domain when its name equals the domain title.
+// If your groups look like "HR - Recruitment", set the prefix/suffix here so they get stripped.
+const GROUP_NAME_PREFIX: string = '';
+const GROUP_NAME_SUFFIX: string = '';
+
+const normalize = (s: string): string => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+const groupToDomainKey = (groupTitle: string): string => {
+  let t = (groupTitle || '').trim();
+  if (GROUP_NAME_PREFIX && t.toLowerCase().indexOf(GROUP_NAME_PREFIX.toLowerCase()) === 0) {
+    t = t.substring(GROUP_NAME_PREFIX.length);
+  }
+  if (GROUP_NAME_SUFFIX && t.toLowerCase().slice(-GROUP_NAME_SUFFIX.length) === GROUP_NAME_SUFFIX.toLowerCase()) {
+    t = t.substring(0, t.length - GROUP_NAME_SUFFIX.length);
+  }
+  return normalize(t);
+};
 
 export class PolicyService {
   constructor(private context: WebPartContext) {}
@@ -50,6 +73,48 @@ export class PolicyService {
 
     const items = await this.getAll(url);
     return items.map(i => ({ id: i.Id, title: i.Title }));
+  }
+
+  private async getJson(url: string): Promise<any> {
+    const res: SPHttpClientResponse = await this.context.spHttpClient.get(
+      url,
+      SPHttpClient.configurations.v1
+    );
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+    return res.json();
+  }
+
+  /**
+   * Works out what the current user may see:
+   *  - Site Owners group member (or site collection admin) => everything
+   *  - otherwise => only domains whose title matches one of the user's groups
+   */
+  public async getUserAccess(domains: IDomain[]): Promise<IUserAccess> {
+    const base = this.context.pageContext.web.absoluteUrl;
+
+    const [groupsJson, ownerGroup, me] = await Promise.all([
+      this.getJson(`${base}/_api/web/currentuser/groups?$select=Id,Title`),
+      this.getJson(`${base}/_api/web/associatedownergroup?$select=Id,Title`),
+      this.getJson(`${base}/_api/web/currentuser?$select=IsSiteAdmin`)
+    ]);
+
+    const groups: { Id: number; Title: string }[] = groupsJson.value || [];
+
+    const isOwner =
+      !!me.IsSiteAdmin || groups.some(g => g.Id === ownerGroup.Id);
+
+    if (isOwner) {
+      return { isOwner: true, allowedDomains: domains.map(d => d.title) };
+    }
+
+    const groupKeys = groups.map(g => groupToDomainKey(g.Title));
+    const allowedDomains = domains
+      .filter(d => groupKeys.indexOf(normalize(d.title)) > -1)
+      .map(d => d.title);
+
+    return { isOwner: false, allowedDomains };
   }
 
   /**

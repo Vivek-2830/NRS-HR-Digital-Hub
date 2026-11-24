@@ -22,6 +22,8 @@ interface IFormsAndResourcesState {
   domainFilter: string;
   typeFilter: string;
   search: string;
+  isOwner: boolean;          // Site Owners group member (or site collection admin)
+  groupKeys: string[];       // normalised names of the user's groups (used to match HR domains)
 }
 
 const ALL_DOMAINS = '__all_domains__';
@@ -30,6 +32,24 @@ const ALL_TYPES = '__all_types__';
 // Only these types are shown on the page and in the Type dropdown.
 // Spelling must match the choice values in SharePoint (case is ignored).
 const ALLOWED_TYPES: string[] = ['Resources', 'Checklist', 'Template', 'Guide'];
+
+// Group naming convention: a group maps to an HR domain when its name equals the domain title.
+// If your groups look like "HR - Recruitment", set the prefix/suffix so they get stripped.
+const GROUP_NAME_PREFIX: string = '';
+const GROUP_NAME_SUFFIX: string = '';
+
+const normalize = (v: string): string => (v || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+const groupToDomainKey = (groupTitle: string): string => {
+  let t = (groupTitle || '').trim();
+  if (GROUP_NAME_PREFIX && t.toLowerCase().indexOf(GROUP_NAME_PREFIX.toLowerCase()) === 0) {
+    t = t.substring(GROUP_NAME_PREFIX.length);
+  }
+  if (GROUP_NAME_SUFFIX && t.toLowerCase().slice(-GROUP_NAME_SUFFIX.length) === GROUP_NAME_SUFFIX.toLowerCase()) {
+    t = t.substring(0, t.length - GROUP_NAME_SUFFIX.length);
+  }
+  return normalize(t);
+};
 
 export default class FormsAndResources extends React.Component<IFormsAndResourcesProps,IFormsAndResourcesState> {
 
@@ -41,7 +61,9 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
       error: '',
       domainFilter: ALL_DOMAINS,
       typeFilter: ALL_TYPES,
-      search: ''
+      search: '',
+      isOwner: false,
+      groupKeys: []
     };
   }
 
@@ -101,6 +123,30 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
     return out;
   }
 
+  // True when the user may see an item with these domains
+  private canSee(domains: string[], isOwner: boolean, groupKeys: string[]): boolean {
+    if (isOwner) { return true; }
+    for (let i = 0; i < domains.length; i++) {
+      if (groupKeys.indexOf(normalize(domains[i])) > -1) { return true; }
+    }
+    return false;
+  }
+
+  // Site Owners (or site collection admin) => everything; otherwise limited to their domain groups
+  private async loadAccess(): Promise<{ isOwner: boolean; groupKeys: string[] }> {
+    const [groups, ownerGroup, me] = await Promise.all([
+      sp.web.currentUser.groups.select('Id', 'Title')(),
+      sp.web.associatedOwnerGroup.select('Id')(),
+      sp.web.currentUser.select('IsSiteAdmin')()
+    ]);
+
+    const list: any[] = groups as any[];
+    const ownerId = (ownerGroup as any).Id;
+    const isOwner = !!(me as any).IsSiteAdmin || list.some((g) => g.Id === ownerId);
+
+    return { isOwner: isOwner, groupKeys: list.map((g) => groupToDomainKey(g.Title)) };
+  }
+
   // ---------- data ----------
 
   private async loadItems(): Promise<void> {
@@ -109,6 +155,8 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
     this.setState({ loading: true, error: '' });
 
     try {
+      const access = await this.loadAccess();
+
       const select: string[] = ['Id', 'FileLeafRef', 'FileRef', 'FSObjType', typeField, hrDomainField + '/Id', hrDomainField + '/Title'];
       if (nameField && nameField !== 'FileLeafRef') { select.push(nameField); }
 
@@ -130,6 +178,10 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
         const allowedTypes = this.getAllowedTypes(this.toArray(r[typeField]));
         if (allowedTypes.length === 0) { continue; }
 
+        // non-owners only see items in the domains their groups map to
+        const itemDomains = this.toArray(r[hrDomainField], 'Title');
+        if (!this.canSee(itemDomains, access.isOwner, access.groupKeys)) { continue; }
+
         const fileName: string = r.FileLeafRef || '';
         const ext = this.getExt(fileName);
         const nameValue: string = nameField && nameField !== 'FileLeafRef' ? r[nameField] : '';
@@ -142,13 +194,13 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
           ext: ext,
           url: r.FileRef,
           downloadUrl: siteUrl + '/_layouts/15/download.aspx?SourceUrl=' + encodeURIComponent(r.FileRef),
-          domains: this.toArray(r[hrDomainField], 'Title'),
+          domains: itemDomains,
           types: allowedTypes
         });
       }
 
       items.sort((a, b) => a.name.localeCompare(b.name));
-      this.setState({ items: items, loading: false });
+      this.setState({ items: items, loading: false, isOwner: access.isOwner, groupKeys: access.groupKeys });
     } catch (e) {
       const msg = e && (e as any).message ? (e as any).message : String(e);
       this.setState({
@@ -177,11 +229,14 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
 
   public render(): React.ReactElement<IFormsAndResourcesProps> {
 
-    const { items, loading, error, domainFilter, typeFilter, search } = this.state;
+    const { items, loading, error, domainFilter, typeFilter, search, isOwner, groupKeys } = this.state;
 
+    // dropdown only offers domains the user can see
     const domainOptions: string[] = [];
     items.forEach((i) => {
-      i.domains.forEach((d) => domainOptions.push(d));
+      i.domains.forEach((d) => {
+        if (isOwner || groupKeys.indexOf(normalize(d)) > -1) { domainOptions.push(d); }
+      });
     });
     const domains = this.unique(domainOptions);
     const filtered = this.getFilteredItems();
@@ -271,7 +326,11 @@ export default class FormsAndResources extends React.Component<IFormsAndResource
                     )}
 
                     {!loading && !error && filtered.length === 0 && (
-                      <tr><td colSpan={3} className="table-message">No resources found.</td></tr>
+                      <tr><td colSpan={3} className="table-message">
+                        {!isOwner && groupKeys.length === 0
+                          ? 'You are not a member of any HR domain group. Please contact HR for access.'
+                          : 'No resources found.'}
+                      </td></tr>
                     )}
 
                     {!loading && !error && filtered.map((item) => (

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { INrsHrPoliciesAToZProps } from './INrsHrPoliciesAToZProps';
-import { PolicyService, IPolicy, IDomain } from './PolicyService';
+import { PolicyService, IPolicy, IDomain, IUserAccess } from './PolicyService';
 
 require('../assets/style.css');
 
 const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
   const [policies, setPolicies] = useState<IPolicy[]>([]);
   const [domains, setDomains] = useState<IDomain[]>([]);
+  const [access, setAccess] = useState<IUserAccess>({ isOwner: false, allowedDomains: [] });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
@@ -21,11 +22,15 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
     const service = new PolicyService(props.context);
 
     Promise.all([service.getDomains(), service.getPolicies()])
-      .then(([d, p]) => {
-        setDomains(d);
-        setPolicies(p);
-        setLoading(false);
-      })
+      .then(([d, p]) =>
+        service.getUserAccess(d).then(a => {
+          setAccess(a);
+          // dropdown only offers domains the user can see
+          setDomains(a.isOwner ? d : d.filter(x => a.allowedDomains.indexOf(x.title) > -1));
+          setPolicies(a.isOwner ? p : p.filter(x => a.allowedDomains.indexOf(x.domain) > -1));
+          setLoading(false);
+        })
+      )
       .catch(err => {
         console.error(err);
         setError('Unable to load policies. ' + (err.message || ''));
@@ -222,7 +227,9 @@ const NrsHrPoliciesAToZ: React.FC<INrsHrPoliciesAToZProps> = (props) => {
 
             {!loading && !error && groups.length === 0 && (
               <div id="noResults" className="no-results">
-                No matching policies found.
+                {!access.isOwner && access.allowedDomains.length === 0
+                  ? 'You are not a member of any HR domain group. Please contact HR for access.'
+                  : 'No matching policies found.'}
               </div>
             )}
           </div>
