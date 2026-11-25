@@ -41,7 +41,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
       userDisplayName
     } = this.props;
 
-   const BannerImageLink = this.props.bannerImageUrl || require("../assets/Banner.jpg");
+  //  const BannerImageLink = this.props.bannerImageUrl || require("../assets/Banner.jpg");
 
     return (
       <div id='Homepage' style={{ backgroundColor:'#faf9f8'}}>
@@ -66,7 +66,7 @@ export default class NrsHomePage extends React.Component<INrsHomePageProps, INrs
               </p>
             </div>
 
-            <div className="hr-team-photo" role="img" aria-label="Human Capital Management Group team"  style={{ backgroundImage: " url(" + BannerImageLink + ")" }}></div>
+            <div className="hr-team-photo" role="img" aria-label="Human Capital Management Group team"></div>
 
           </div>
 

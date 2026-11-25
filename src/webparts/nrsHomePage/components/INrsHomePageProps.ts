@@ -8,6 +8,6 @@ export interface INrsHomePageProps {
   HRPolicieTitle: string;
   HRPolicieSource: string;
   HRPolicieDescription: string;
-  filePickerResult: any;
-  bannerImageUrl: string;
+  // filePickerResult: any;
+  // bannerImageUrl: string;
 }
