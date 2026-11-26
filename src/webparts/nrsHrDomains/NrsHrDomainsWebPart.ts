@@ -4,9 +4,11 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneDropdown,
-  IPropertyPaneDropdownOption
+  IPropertyPaneDropdownOption,
+  PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+
 
 import NrsHrDomains from './components/NrsHrDomains';
 import { HrService } from './components/HrService';
@@ -17,6 +19,7 @@ export interface INrsHrDomainsWebPartProps {
 service: HrService;
   categoryId: number;
   siteUrl: string;
+  ServicePortalLink: string;
 }
 
 export default class NrsHrDomainsWebPart extends BaseClientSideWebPart<INrsHrDomainsWebPartProps> {
@@ -35,7 +38,8 @@ export default class NrsHrDomainsWebPart extends BaseClientSideWebPart<INrsHrDom
     const element: React.ReactElement<INrsHrDomainsProps> = React.createElement(NrsHrDomains, {
       service: this.service,
       categoryId: Number(this.properties.categoryId),
-      siteUrl: this.context.pageContext.web.absoluteUrl
+      siteUrl: this.context.pageContext.web.absoluteUrl,
+      ServicePortalLink: this.properties.ServicePortalLink
     });
     ReactDom.render(element, this.domElement);
   }
@@ -75,6 +79,9 @@ export default class NrsHrDomainsWebPart extends BaseClientSideWebPart<INrsHrDom
                   options: this.options,
                   selectedKey: this.properties.categoryId,
                   disabled: this.loadingOptions
+                }),
+                PropertyPaneTextField('ServicePortalLink', {
+                  label: 'Service Portal Link'
                 })
               ]
             }
