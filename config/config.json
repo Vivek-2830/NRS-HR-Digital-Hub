@@ -85,7 +85,6 @@
     "FaQsAndKnowledgeWebPartStrings": "lib/webparts/faQsAndKnowledge/loc/{locale}.js",
     "AskHrWebPartStrings": "lib/webparts/askHr/loc/{locale}.js",
     "NrsHrDomainSubpageWebPartStrings": "lib/webparts/nrsHrDomainSubpage/loc/{locale}.js",
-    "NrsAllNewsWebPartStrings": "lib/webparts/nrsAllNews/loc/{locale}.js",
-    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+    "NrsAllNewsWebPartStrings": "lib/webparts/nrsAllNews/loc/{locale}.js"
   }
 }

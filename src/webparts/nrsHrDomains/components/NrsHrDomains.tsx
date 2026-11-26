@@ -260,7 +260,7 @@ const NrsHrDomains: React.FC<INrsHrDomainsProps> = ({ service, categoryId, siteU
               <p>Have a question this domain does not answer? Raise it through the People Service Portal.</p>
             </div>
           </div>
-          <a href={this.props.ServicePortalLink} className="portal-button">
+          <a href={"https://myhcmd.nrs.gov.ng/dashboard"} className="portal-button">
             Open the People Service Portal
             <i className="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
