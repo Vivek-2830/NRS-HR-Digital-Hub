@@ -4,10 +4,14 @@ import { INrsHrDomainSubpageProps } from './INrsHrDomainSubpageProps';
 
 require('../assets/style.css');
 
+const FAQ_URL = 'https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx';
+const ASK_HR_URL = 'https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx';
+
 const BADGE: { [k: string]: string } = {
   Procedures: 'Procedure', Forms: 'Form', 'Guides and checklists': 'Guide'
 };
 const stripExt = (n: string): string => n.replace(/\.[^/.]+$/, '');
+const extOf = (n: string): string => (n.split('.').pop() || '').toUpperCase();
 const downloadUrl = (site: string, fileRef: string): string =>
   `${site}/_layouts/15/download.aspx?SourceUrl=${encodeURIComponent(fileRef)}`;
 const fmt = (d?: string): string =>
@@ -24,6 +28,7 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
 
   const [policy, setPolicy] = React.useState<IPolicyDoc | undefined>();
   const [siblings, setSiblings] = React.useState<IPolicyDoc[]>([]);
+  const [domainLink, setDomainLink] = React.useState('');
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState('');
 
@@ -35,9 +40,21 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
       .then(p => {
         if (cancelled) return;
         setPolicy(p);
-        return service.getDocs(p.HRDomain ? p.HRDomain.Id : 0).then(all => {
+
+        const domainId = p.HRDomain ? p.HRDomain.Id : 0;
+
+        // "Domain Link" column from the "HR Domain Hub" list (failure is non-fatal: breadcrumb falls back)
+        const linkPromise = domainId
+          ? service.getDomainLink(domainId)
+            .then(u => { if (!cancelled) setDomainLink(u); })
+            .catch(() => { /* ignore, fall back to home link */ })
+          : Promise.resolve();
+
+        const docsPromise = service.getDocs(domainId).then(all => {
           if (!cancelled) setSiblings(all.filter(d => d.Id !== p.Id));
         });
+
+        return Promise.all([linkPromise, docsPromise]);
       })
       .catch(e => { if (!cancelled) setError(e.message); })
       .then(() => { if (!cancelled) setLoading(false); });
@@ -52,12 +69,11 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
 
   const title = policy.Title || stripExt(policy.FileLeafRef);
   const domain = policy.HRDomain ? policy.HRDomain.Title : '';
+
+  // Breadcrumb target: Domain Link from the HR Domain Hub list, else the web part prop, else home
+  const domainHref = domainLink || domainPageUrl || homeUrl || siteUrl;
+
   const resources = siblings.filter(d => d.PolicyType !== 'Policies' && d.PolicyType !== 'Procedures');
-  const relatedPolicies = siblings.filter(d => d.PolicyType === 'Policies');
-  // const ext = (policy.FileLeafRef.split('.').pop() || '').toUpperCase();
-
-  const extOf = (n: string): string => (n.split('.').pop() || '').toUpperCase();
-
   const procedures = siblings.filter(d => d.PolicyType === 'Procedures').slice(0, 1);
   const ext = extOf(policy.FileLeafRef);
 
@@ -73,8 +89,8 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
 
       <div className="page">
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <a href={homeUrl || siteUrl}>Home</a><span className="sep">/</span>
-          <a href={`${domainPageUrl || '#'}`}>{domain}</a><span className="sep">/</span>
+          <a href={homeUrl || siteUrl} data-interception="off">Home</a><span className="sep">/</span>
+          <a href={domainHref} data-interception="off">{domain}</a><span className="sep">/</span>
           <span aria-current="page">{title}</span>
         </nav>
 
@@ -83,28 +99,13 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
         <div className="rule"></div>
 
         {policy.PolicyOverview && (
-          <div className="lead"
-          // dangerouslySetInnerHTML={{ __html: policy.Overview }} 
-          >
+          <div className="lead">
             {policy.PolicyOverview}
           </div>
         )}
 
         <div className="layout">
           <div className="main">
-            {/* <section>
-              <h3 className="section-title">Download</h3>
-              <div className="downloads">
-                <a href={downloadUrl(siteUrl, policy.FileRef)} className="dl primary">
-                  <span className="icon"><DlIcon /></span>
-                  <span>
-                    <span className="name" style={{ display: 'block' }}>Policy</span>
-                    <span className="type">{ext}</span>
-                  </span>
-                </a>
-              </div>
-            </section> */}
-
             <section>
               <h3 className="section-title">Download</h3>
               <div className="downloads">
@@ -146,69 +147,47 @@ const NrsHrDomainSubpage: React.FC<INrsHrDomainSubpageProps> = ({ service, siteU
               </section>
             )}
 
-            {/* {relatedPolicies.length > 0 && (
-              <section>
-                <h3 className="section-title">Related policies</h3>
-                <div className="related">
-                  {relatedPolicies.map(r => (
-                    <a key={r.Id} href={`${window.location.pathname}?policyId=${r.Id}`} data-interception="off">
-                      {r.Title || stripExt(r.FileLeafRef)}
-                    </a>
-                  ))}
-                </div>
-              </section>
-            )} */}
-
             <section>
               <h3 className="section-title">Need help</h3>
-              {/* <div className="help">
-                <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">
-                  <span className="name" style={{ display: 'block' }}>FAQs and Knowledge Base</span>
-                  <span className="desc" style={{ display: 'block' }}>Quick answers on this policy.</span>
-                </a>
-                <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">
-                  <span className="name" style={{ display: 'block' }}>Ask HR</span>
-                  <span className="desc" style={{ display: 'block' }}>Raise a query through the People Service Portal.</span>
-                </a>
-              </div> */}
-              <div className="hr-container" style={{marginTop:'0'}}>
+              <div className="hr-container" style={{ marginTop: '0' }}>
 
-              <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
-                <div className="hr-icon">
-                  <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="9"></circle>
-                    <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path>
-                    <circle cx="12" cy="16.5" r=".5" fill="currentColor"></circle>
-                  </svg>
+                {/* Cards are <div>s with a single inner link: nested <a> tags are invalid HTML */}
+                <div className="hr-card">
+                  <div className="hr-icon">
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path>
+                      <circle cx="12" cy="16.5" r=".5" fill="currentColor"></circle>
+                    </svg>
+                  </div>
+
+                  <div className="hr-content">
+                    <h3>FAQs and Knowledge Base</h3>
+                    <p>Quick answers for this area of HR.</p>
+                    <a href={FAQ_URL} data-interception="off">
+                      Go to FAQs <span>›</span>
+                    </a>
+                  </div>
                 </div>
 
-                <div className="hr-content">
-                  <h3>FAQs and Knowledge Base</h3>
-                  <p>Quick answers for this area of HR.</p>
-                  <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/FAQsandKnowledgeBase.aspx">
-                    Go to FAQs <span>›</span>
-                  </a>
-                </div>
-              </a>
+                <div className="hr-card">
+                  <div className="hr-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M5 4.5h14v12H9l-4 3v-15z"></path>
+                      <path d="M9 9h6M9 12h4"></path>
+                    </svg>
+                  </div>
 
-              <a style={{textDecoration:'none'}} href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx" className="hr-card">
-                <div className="hr-icon">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 4.5h14v12H9l-4 3v-15z"></path>
-                    <path d="M9 9h6M9 12h4"></path>
-                  </svg>
+                  <div className="hr-content">
+                    <h3>Ask HR</h3>
+                    <p>Raise a query through the People Service Portal.</p>
+                    <a href={ASK_HR_URL} data-interception="off">
+                      Ask HR <span>›</span>
+                    </a>
+                  </div>
                 </div>
 
-                <div className="hr-content">
-                  <h3>Ask HR</h3>
-                  <p>Raise a query through the People Service Portal.</p>
-                  <a href="https://firsgovng.sharepoint.com/sites/HRDigitalHub/SitePages/AskHR.aspx">
-                    Ask HR <span>›</span>
-                  </a>
-                </div>
-              </a>
-
-            </div>
+              </div>
             </section>
           </div>
 

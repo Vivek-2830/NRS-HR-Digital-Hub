@@ -4,7 +4,7 @@ export interface IDomain {
   Id: number;
   Title: string;
   Overview?: string;
-  DomainLink?: { Url: string; Description?: string };  // add this
+  DomainLink?: { Url: string; Description?: string };
 }
 
 export interface IPolicyDoc {
@@ -54,14 +54,26 @@ export class HrService {
     );
   }
 
-public async getPolicy(id: number): Promise<IPolicyDoc> {
-  const url =
-    `${this.siteUrl}/_api/web/lists/getbytitle('${this.library}')/items(${id})` +
-    `?$select=Id,Title,FileLeafRef,FileRef,PolicyType,PolicyOverview,Reference,PolicyVersion,` +
-    `ApprovalDate,EffectiveDate,NextReview,DocOwner,HRDomain/Id,HRDomain/Title` +
-    `&$expand=HRDomain`;
-  const res = await this.http.get(url, SPHttpClient.configurations.v1);
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-  return (await res.json()) as IPolicyDoc;
-}
+  public async getPolicy(id: number): Promise<IPolicyDoc> {
+    const url =
+      `${this.siteUrl}/_api/web/lists/getbytitle('${this.library}')/items(${id})` +
+      `?$select=Id,Title,FileLeafRef,FileRef,PolicyType,PolicyOverview,Reference,PolicyVersion,` +
+      `ApprovalDate,EffectiveDate,NextReview,DocOwner,HRDomain/Id,HRDomain/Title` +
+      `&$expand=HRDomain`;
+    const res = await this.http.get(url, SPHttpClient.configurations.v1);
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    return (await res.json()) as IPolicyDoc;
+  }
+
+  // Returns the "Domain Link" URL for one item in the HR Domain Hub list
+  public async getDomainLink(domainId: number): Promise<string> {
+    const url =
+      `${this.siteUrl}/_api/web/lists/getbytitle('${this.hubList}')/items(${domainId})` +
+      `?$select=Id,DomainLink`;
+    const res = await this.http.get(url, SPHttpClient.configurations.v1);
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const item = (await res.json()) as IDomain;
+    const v: any = item.DomainLink;
+    return typeof v === 'string' ? v : (v && v.Url) || '';
+  }
 }
